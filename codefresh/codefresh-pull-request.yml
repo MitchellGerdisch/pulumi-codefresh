@@ -1,0 +1,100 @@
+# This is the Codefresh pipeline workflow used in conjunction with the Pulumi Github Application (https://www.pulumi.com/docs/guides/continuous-delivery/github-app/)
+# so that a pull request causes a Codefresh "PRcheck" pipeline to run as defined by this yaml file.
+#
+# HOW TO RUN DEMO
+# Because of how Github and Codefresh work and the lack of Branch details sent on a PR,
+# one needs to specify the demo's folder in the PR comment (the PR one-liner entered when creating the PR)
+# So to run demo:
+# - Create a branch with the name of the demo folder in the name of the branch (e.g. cicd-demo-aws-ts-serverless)
+# - Create a PR for the branch.
+#
+# When executed, it does the following:
+# 1) Runs a `pulumi preview` against the prod stack.
+# 2) This in turn, via the Pulumi Github application, add the results of the preview to the PR in Github.
+#
+# CI/CD DEMO SET UP INSTRUCTIONS
+# See comments at bottom of this file on how to set up Codefresh for this to work.
+#
+
+version: '1.0'
+stages:
+  - prepare
+  - preview
+steps:
+  # Get Pulumi application from Git
+  cloneRepo:
+    stage: prepare
+    title: Clone Repo
+    type: git-clone
+    repo: '${{CF_REPO_OWNER}}/${{CF_REPO_NAME}}'
+    revision: '${{CF_REVISION}}'
+    git: github
+  # Prepare the environment
+  prepareEnvironment:
+    stage: prepare
+    title: Prepare Environment
+    fail_fast: true
+    image: pulumi/pulumi
+    shell: bash
+    working_directory: ${{CF_VOLUME_PATH}}/${{CF_REPO_NAME}}/${{REPO_DIR}} # Where is the pulumi code for this project found in the repo?
+    commands:
+      # Set PULUMI_HOME so it uses the volume and not the default ~/.pulumi - this is especially important for K8s since destroys need to find the k8s provider stored in $PULUMI_HOME
+      # Be sure to set Codefresh Account Settings/Pipeline Settings to keep build environment for "Pending Approval" state.
+      - export PULUMI_HOME=$CF_VOLUME_PATH
+      - cf_export PULUMI_HOME
+
+      # create some environment variables for use in this step and subsequent steps
+      # Since the idea is to ensure this PR doesn't break production when it is merged to main,
+      # the preview is executed against the Pulumi prod stack.
+      - export PULUMI_STACK_PATH=$PULUMI_ORG/prod
+
+      - cf_export PULUMI_STACK_PATH
+
+      # Set up the base environment
+      - npm install
+
+      # In the interest of keeping a single yml for all demos,
+      # this logic is used to handle having to set up the k8s cluster folder for k8s demos that leverage the cluster code.
+      # For the base cluster demo this code will run unnecessarily, but it allows for more flexibility later if we add other k8s demos.
+      - export GOOGLE_APPLICATION_CREDENTIALS=$PWD/google_application_credentials.json
+      - echo $GOOGLE_CREDENTIALS > $GOOGLE_APPLICATION_CREDENTIALS
+      - cf_export GOOGLE_APPLICATION_CREDENTIALS
+      # This modifies gcp.ts to produce a kubeconfig that is compatible with a gcloud-free environment and it sets up node modules for the cluster code.
+      - if [[ $PWD =~ k8s ]] ; then  cd ../k8s-ts-cluster ; sed -i -e '/ config:/{N;N;N;N;d;}' ./gcp.ts ; npm install ; fi ;
+  # Run preview against prod to test things out
+  previewStack:
+    stage: preview
+    title: Preview Pulumi Stack
+    fail_fast: true
+    image: pulumi/pulumi
+    working_directory: ${{prepareEnvironment}}
+    commands:
+      # Select stack
+      - pulumi stack select $PULUMI_STACK_PATH
+      # Preview the stack. This will cause the results to be added to the PR via the magic of the Pulumi Github Application.
+      # See: https://www.pulumi.com/docs/guides/continuous-delivery/github-app/
+      - pulumi preview
+#
+####### SET UP NOTES ######
+# The following notes explain how to set things up for this to work.
+#
+# Prequisites
+# - The set up defined in the main codefresh.yml file has already been done.
+# - The Pulumi Github application has been enabled for the given Github repo. See https://www.pulumi.com/docs/guides/continuous-delivery/github-app/
+#
+# For each Codefresh project, do the following:
+# - Create a pipeline named "pull-request-check"
+#   - Associate it with the customer-engineering repo (i.e. the repo where the demos are stored).
+#   - Select the Workflow view
+#   - Click the Triggers tab on the righthand of the screen in the Workflow view
+#     - In the "TRIGGER BY" section, only "Pull request opened" should be selected.
+#     - In the "BRANCH (REGEX EXPRESSION)" section, enable RegexInput slider and enter: /.*<NAME OF FOLDER FOR SPECIFIC DEMO>.*/gi
+#       e.g. /.*aws-ts-serverless.*/gi
+#       This will cause the pipeline to trigger when it sees that text in the branch being PRed. See demo instructions above.
+#   - Click the Variables tab on the righthand of the screen in the Workflow view.
+#     - Click the gear (DO NOT CLICK ADD VARIABLE).
+#       - Click IMPORT FROM SHARED CONFIGURATION and select the Cloud Credentials, Pulumi Organization, and STAGING Pulumi Access Token configurations created above.
+#   - Once back to the Workflow view, change the "Inline YAML" selection to "Use YAML from Repository" and specify the master branch and the path to this yaml file you are reading right now.
+#   - Make sure the github folder for the given demo (e.g. aws-ts-webserver) has a Pulumi.prod.yaml file in it. If not, create one based on the Pulumi.dev.yaml file or from scratch.
+#
+

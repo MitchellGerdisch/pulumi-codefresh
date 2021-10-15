@@ -1,0 +1,1753 @@
+{
+    "version": 3,
+    "deployment": {
+        "manifest": {
+            "time": "2021-01-20T07:58:59.636611-06:00",
+            "magic": "b97e7928c9cc0445267296faa5ef9dd454cae1ccea0cfb784c0ecc77b9f781d6",
+            "version": "v2.17.1"
+        },
+        "secrets_providers": {
+            "type": "service",
+            "state": {
+                "url": "https://api.pulumi.com",
+                "owner": "demo",
+                "project": "pulumi-codefresh",
+                "stack": "staging"
+            }
+        },
+        "resources": [
+            {
+                "urn": "urn:pulumi:staging::pulumi-codefresh::pulumi:pulumi:Stack::pulumi-codefresh-staging",
+                "custom": false,
+                "type": "pulumi:pulumi:Stack",
+                "outputs": {
+                    "clusterName": "pulumi-codefresh-k8s-1f6eea7",
+                    "helmAppUrl": "http://35.184.125.85",
+                    "namespaceName": "pulumi-codefresh",
+                    "nginxLbUrl": "http://34.67.97.217"
+                }
+            },
+            {
+                "urn": "urn:pulumi:staging::pulumi-codefresh::custom:x:GkeCluster::pulumi-codefresh",
+                "custom": false,
+                "type": "custom:x:GkeCluster",
+                "parent": "urn:pulumi:staging::pulumi-codefresh::pulumi:pulumi:Stack::pulumi-codefresh-staging"
+            },
+            {
+                "urn": "urn:pulumi:staging::pulumi-codefresh::pulumi:providers:gcp::default_4_0_0",
+                "custom": true,
+                "id": "a94187b3-4931-4d7d-b909-d211b2781150",
+                "type": "pulumi:providers:gcp",
+                "inputs": {
+                    "project": {
+                        "4dabf18193072939515e22adb298388d": "1b47061264138c4ac30d75fd1eb44270",
+                        "ciphertext": "AAABAI4zehiuFM3+l6c5uLquyWjoza229Zao0KbI5JgSxyTQgUj8Nfv/i9n3S2EJ"
+                    },
+                    "region": "us-central1",
+                    "version": "4.0.0",
+                    "zone": "us-central1-a"
+                },
+                "outputs": {
+                    "project": {
+                        "4dabf18193072939515e22adb298388d": "1b47061264138c4ac30d75fd1eb44270",
+                        "ciphertext": "AAABAPYofrwZ2Ugb9idXUKS0QrvdJ/RsLPEvolBivyoe4TRIX398hNJsLUUfI2M9"
+                    },
+                    "region": "us-central1",
+                    "version": "4.0.0",
+                    "zone": "us-central1-a"
+                }
+            },
+            {
+                "urn": "urn:pulumi:staging::pulumi-codefresh::custom:x:GkeCluster$gcp:storage/bucket:Bucket::pulumi-codefresh-bucket",
+                "custom": true,
+                "id": "pulumi-codefresh-bucket-732ab2f",
+                "type": "gcp:storage/bucket:Bucket",
+                "inputs": {
+                    "__defaults": [
+                        "forceDestroy",
+                        "location",
+                        "name",
+                        "storageClass"
+                    ],
+                    "forceDestroy": false,
+                    "location": "US",
+                    "name": "pulumi-codefresh-bucket-732ab2f",
+                    "storageClass": "STANDARD"
+                },
+                "outputs": {
+                    "bucketPolicyOnly": false,
+                    "cors": [],
+                    "defaultEventBasedHold": false,
+                    "encryption": null,
+                    "forceDestroy": false,
+                    "id": "pulumi-codefresh-bucket-732ab2f",
+                    "labels": {},
+                    "lifecycleRules": [],
+                    "location": "US",
+                    "logging": null,
+                    "name": "pulumi-codefresh-bucket-732ab2f",
+                    "project": "pulumi-ce-team",
+                    "requesterPays": false,
+                    "retentionPolicy": null,
+                    "selfLink": "https://www.googleapis.com/storage/v1/b/pulumi-codefresh-bucket-732ab2f",
+                    "storageClass": "STANDARD",
+                    "uniformBucketLevelAccess": false,
+                    "url": "gs://pulumi-codefresh-bucket-732ab2f",
+                    "versioning": null,
+                    "website": null
+                },
+                "parent": "urn:pulumi:staging::pulumi-codefresh::custom:x:GkeCluster::pulumi-codefresh",
+                "provider": "urn:pulumi:staging::pulumi-codefresh::pulumi:providers:gcp::default_4_0_0::a94187b3-4931-4d7d-b909-d211b2781150"
+            },
+            {
+                "urn": "urn:pulumi:staging::pulumi-codefresh::pulumi:providers:random::default_2_4_0",
+                "custom": true,
+                "id": "3b02a453-742b-4345-9568-1a8ac8db59c0",
+                "type": "pulumi:providers:random",
+                "inputs": {
+                    "version": "2.4.0"
+                },
+                "outputs": {
+                    "version": "2.4.0"
+                }
+            },
+            {
+                "urn": "urn:pulumi:staging::pulumi-codefresh::custom:x:GkeCluster$random:index/randomPassword:RandomPassword::pulumi-codefresh-pwd",
+                "custom": true,
+                "id": "none",
+                "type": "random:index/randomPassword:RandomPassword",
+                "inputs": {
+                    "__defaults": [
+                        "lower",
+                        "minLower",
+                        "minNumeric",
+                        "minSpecial",
+                        "minUpper",
+                        "number",
+                        "special",
+                        "upper"
+                    ],
+                    "length": 16,
+                    "lower": true,
+                    "minLower": 0,
+                    "minNumeric": 0,
+                    "minSpecial": 0,
+                    "minUpper": 0,
+                    "number": true,
+                    "special": true,
+                    "upper": true
+                },
+                "outputs": {
+                    "id": "none",
+                    "length": 16,
+                    "lower": true,
+                    "minLower": 0,
+                    "minNumeric": 0,
+                    "minSpecial": 0,
+                    "minUpper": 0,
+                    "number": true,
+                    "result": "yTMu\u0026pguqPyEj\u003c5V",
+                    "special": true,
+                    "upper": true
+                },
+                "parent": "urn:pulumi:staging::pulumi-codefresh::custom:x:GkeCluster::pulumi-codefresh",
+                "provider": "urn:pulumi:staging::pulumi-codefresh::pulumi:providers:random::default_2_4_0::3b02a453-742b-4345-9568-1a8ac8db59c0",
+                "propertyDependencies": {
+                    "length": null
+                }
+            },
+            {
+                "urn": "urn:pulumi:staging::pulumi-codefresh::custom:x:GkeCluster$gcp:container/cluster:Cluster::pulumi-codefresh-k8s",
+                "custom": true,
+                "id": "projects/pulumi-ce-team/locations/us-central1-a/clusters/pulumi-codefresh-k8s-1f6eea7",
+                "type": "gcp:container/cluster:Cluster",
+                "inputs": {
+                    "__defaults": [
+                        "enableBinaryAuthorization",
+                        "enableIntranodeVisibility",
+                        "enableKubernetesAlpha",
+                        "enableLegacyAbac",
+                        "enableShieldedNodes",
+                        "enableTpu",
+                        "name",
+                        "network"
+                    ],
+                    "enableBinaryAuthorization": false,
+                    "enableIntranodeVisibility": false,
+                    "enableKubernetesAlpha": false,
+                    "enableLegacyAbac": false,
+                    "enableShieldedNodes": false,
+                    "enableTpu": false,
+                    "initialNodeCount": 1,
+                    "masterAuth": {
+                        "__defaults": [],
+                        "password": "yTMu\u0026pguqPyEj\u003c5V",
+                        "username": "gcloud-admin"
+                    },
+                    "minMasterVersion": "1.17.15-gke.800",
+                    "name": "pulumi-codefresh-k8s-1f6eea7",
+                    "network": "default",
+                    "nodeConfig": {
+                        "__defaults": [
+                            "preemptible"
+                        ],
+                        "machineType": "n1-standard-1",
+                        "oauthScopes": [
+                            "https://www.googleapis.com/auth/compute",
+                            "https://www.googleapis.com/auth/devstorage.read_only",
+                            "https://www.googleapis.com/auth/logging.write",
+                            "https://www.googleapis.com/auth/monitoring"
+                        ],
+                        "preemptible": false
+                    },
+                    "nodeVersion": "1.17.15-gke.800",
+                    "resourceLabels": {
+                        "__defaults": [],
+                        "cost-center": "pulumi-codefresh"
+                    }
+                },
+                "outputs": {
+                    "__meta": "{\"e2bfb730-ecaa-11e6-8f88-34363bc7c4c0\":{\"create\":2400000000000,\"delete\":2400000000000,\"read\":2400000000000,\"update\":3600000000000},\"schema_version\":\"1\"}",
+                    "addonsConfig": {
+                        "cloudrunConfig": null,
+                        "configConnectorConfig": null,
+                        "dnsCacheConfig": null,
+                        "gcePersistentDiskCsiDriverConfig": null,
+                        "horizontalPodAutoscaling": null,
+                        "httpLoadBalancing": null,
+                        "istioConfig": null,
+                        "kalmConfig": null,
+                        "networkPolicyConfig": {
+                            "disabled": true
+                        }
+                    },
+                    "authenticatorGroupsConfig": null,
+                    "clusterAutoscaling": {
+                        "autoProvisioningDefaults": null,
+                        "autoscalingProfile": "BALANCED",
+                        "enabled": false,
+                        "resourceLimits": []
+                    },
+                    "clusterIpv4Cidr": "10.0.0.0/14",
+                    "clusterTelemetry": {
+                        "type": "ENABLED"
+                    },
+                    "databaseEncryption": {
+                        "keyName": "",
+                        "state": "DECRYPTED"
+                    },
+                    "datapathProvider": "",
+                    "defaultSnatStatus": {
+                        "disabled": false
+                    },
+                    "description": "",
+                    "enableBinaryAuthorization": false,
+                    "enableIntranodeVisibility": false,
+                    "enableKubernetesAlpha": false,
+                    "enableLegacyAbac": false,
+                    "enableShieldedNodes": false,
+                    "enableTpu": false,
+                    "endpoint": "35.184.248.211",
+                    "id": "projects/pulumi-ce-team/locations/us-central1-a/clusters/pulumi-codefresh-k8s-1f6eea7",
+                    "initialNodeCount": 1,
+                    "instanceGroupUrls": [
+                        "https://www.googleapis.com/compute/beta/projects/pulumi-ce-team/zones/us-central1-a/instanceGroups/gke-pulumi-codefresh-k8s-default-pool-c2b0acde-grp"
+                    ],
+                    "ipAllocationPolicy": null,
+                    "labelFingerprint": "d49e27c2",
+                    "location": "us-central1-a",
+                    "loggingService": "logging.googleapis.com/kubernetes",
+                    "maintenancePolicy": null,
+                    "masterAuth": {
+                        "clientCertificate": "",
+                        "clientCertificateConfig": {
+                            "issueClientCertificate": false
+                        },
+                        "clientKey": "",
+                        "clusterCaCertificate": "LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURLakNDQWhLZ0F3SUJBZ0lRR3hPWnZ0clEySDdxSlJFblgyZFJMekFOQmdrcWhraUc5dzBCQVFzRkFEQXYKTVMwd0t3WURWUVFERXlRNU16ZzFNVFF5TXkxa09USXdMVFEzWW1JdFlqYzJNQzAyTkRnM05qYzJNVE15WTJJdwpIaGNOTWpFd01URTVNakkxTVRBeldoY05Nall3TVRFNE1qTTFNVEF6V2pBdk1TMHdLd1lEVlFRREV5UTVNemcxCk1UUXlNeTFrT1RJd0xUUTNZbUl0WWpjMk1DMDJORGczTmpjMk1UTXlZMkl3Z2dFaU1BMEdDU3FHU0liM0RRRUIKQVFVQUE0SUJEd0F3Z2dFS0FvSUJBUURTVCtTWHJWWlQ5VUZpd00wZzBGbnRHenFaeWh1aHRISmkwclVwL2JXdQpBOWVWQXhzZFZlMmtZc0RrREV3TzkvN1lLWDV2bXVZTnhnYUgwN2txUHE1VVZucGFrMkIwTlJldS9OS1MxNzY0CjA2VmNvNkN4c2lxUWVPbGJMU1ZpNXlXWi9sOGhzdFNhSGJJdllOR2VaU09YbFN5UUE3L3pwdVZoMGl1bjhNUHMKejVFQ1RUaGhQQlBYZW4wSXp6TnRPOXE2THVoOElEcmN5eXhmQ2hSR2E1a1d2T0ovdkRQSW9saUh2aytoVEM2NApUZkgySkNCbTFWcmlIanBQSFUvTGpxdjZmRytUdStIVHhTVThjdjkzSG9WZU9oVlJRUDZNTERodUI5YUM4U0hPCnZWbkRHaWVzeCtoYVZXdXVFWW9UUmZQM3FnMWYrQlN2QXYyaEhpMDNaYkNYQWdNQkFBR2pRakJBTUE0R0ExVWQKRHdFQi93UUVBd0lDQkRBUEJnTlZIUk1CQWY4RUJUQURBUUgvTUIwR0ExVWREZ1FXQkJUUGo1SWdMdmFXdjlkdgp6ZGdYL1BXdGZLdUdzekFOQmdrcWhraUc5dzBCQVFzRkFBT0NBUUVBY3JqYk9OQUtHTGxieVJKVkFlZkhhUmVMCnFnOGFDQVdUVndxaGx5MkUvSlVqaUpRbEhldTQxMTlzV3ArYWo3WGxxcjVRc2Q5SndLMUd4eVp3MlI4Tm1lVUoKQzRWa01MeS9xVW1WaVIvT0o3dExqV3p5dFhodjAyMi9jWUxzcWNkWGtlb1NYdy84NzJGUzJVbkN2L2lyc1l0NgpoSTBpcUZ0LzE2T051dWpIeURSL05EWGdseVE0aWNYcUdrNDduWWE3Y3lVL0txUnlETlorTWgreE4ySjBJSHpMCnVoQURUMTYrck5vempKZ1N2azVDd0lZT2UvUlN6U25vejZhb3Juc0tjY2FpS3R5STc3aTFpY3doVzFVZ1lTd1gKQnBkZEowK2xTcnpSQWFabDA1K2c5UEsxZHZFTVVESEt1c29Sa2Zld1VkY3g3WXNCbHpKMXpRcTQ0Ri9pVXc9PQotLS0tLUVORCBDRVJUSUZJQ0FURS0tLS0tCg==",
+                        "password": "yTMu\u0026pguqPyEj\u003c5V",
+                        "username": "gcloud-admin"
+                    },
+                    "masterAuthorizedNetworksConfig": null,
+                    "masterVersion": "1.17.15-gke.800",
+                    "minMasterVersion": "1.17.15-gke.800",
+                    "monitoringService": "monitoring.googleapis.com/kubernetes",
+                    "name": "pulumi-codefresh-k8s-1f6eea7",
+                    "network": "projects/pulumi-ce-team/global/networks/default",
+                    "networkPolicy": {
+                        "enabled": false,
+                        "provider": "PROVIDER_UNSPECIFIED"
+                    },
+                    "networkingMode": "ROUTES",
+                    "nodeConfig": {
+                        "bootDiskKmsKey": "",
+                        "diskSizeGb": 100,
+                        "diskType": "pd-standard",
+                        "guestAccelerators": [],
+                        "imageType": "COS",
+                        "kubeletConfig": null,
+                        "labels": {},
+                        "linuxNodeConfig": null,
+                        "localSsdCount": 0,
+                        "machineType": "n1-standard-1",
+                        "metadata": {
+                            "disable-legacy-endpoints": "true"
+                        },
+                        "minCpuPlatform": "",
+                        "oauthScopes": [
+                            "https://www.googleapis.com/auth/monitoring",
+                            "https://www.googleapis.com/auth/devstorage.read_only",
+                            "https://www.googleapis.com/auth/logging.write",
+                            "https://www.googleapis.com/auth/compute"
+                        ],
+                        "preemptible": false,
+                        "sandboxConfig": null,
+                        "serviceAccount": "default",
+                        "shieldedInstanceConfig": {
+                            "enableIntegrityMonitoring": true,
+                            "enableSecureBoot": false
+                        },
+                        "tags": [],
+                        "taints": [],
+                        "workloadMetadataConfig": null
+                    },
+                    "nodeLocations": [],
+                    "nodePools": [
+                        {
+                            "autoscaling": null,
+                            "initialNodeCount": 1,
+                            "instanceGroupUrls": [
+                                "https://www.googleapis.com/compute/v1/projects/pulumi-ce-team/zones/us-central1-a/instanceGroupManagers/gke-pulumi-codefresh-k8s-default-pool-c2b0acde-grp"
+                            ],
+                            "management": {
+                                "autoRepair": true,
+                                "autoUpgrade": true
+                            },
+                            "maxPodsPerNode": 0,
+                            "name": "default-pool",
+                            "namePrefix": "",
+                            "nodeConfig": {
+                                "bootDiskKmsKey": "",
+                                "diskSizeGb": 100,
+                                "diskType": "pd-standard",
+                                "guestAccelerators": [],
+                                "imageType": "COS",
+                                "kubeletConfig": null,
+                                "labels": {},
+                                "linuxNodeConfig": null,
+                                "localSsdCount": 0,
+                                "machineType": "n1-standard-1",
+                                "metadata": {
+                                    "disable-legacy-endpoints": "true"
+                                },
+                                "minCpuPlatform": "",
+                                "oauthScopes": [
+                                    "https://www.googleapis.com/auth/monitoring",
+                                    "https://www.googleapis.com/auth/devstorage.read_only",
+                                    "https://www.googleapis.com/auth/logging.write",
+                                    "https://www.googleapis.com/auth/compute"
+                                ],
+                                "preemptible": false,
+                                "sandboxConfig": null,
+                                "serviceAccount": "default",
+                                "shieldedInstanceConfig": {
+                                    "enableIntegrityMonitoring": true,
+                                    "enableSecureBoot": false
+                                },
+                                "tags": [],
+                                "taints": [],
+                                "workloadMetadataConfig": null
+                            },
+                            "nodeCount": 1,
+                            "nodeLocations": [
+                                "us-central1-a"
+                            ],
+                            "upgradeSettings": {
+                                "maxSurge": 1,
+                                "maxUnavailable": 0
+                            },
+                            "version": "1.17.15-gke.800"
+                        }
+                    ],
+                    "nodeVersion": "1.17.15-gke.800",
+                    "notificationConfig": {
+                        "pubsub": {
+                            "enabled": false,
+                            "topic": ""
+                        }
+                    },
+                    "podSecurityPolicyConfig": {
+                        "enabled": false
+                    },
+                    "privateClusterConfig": null,
+                    "project": "pulumi-ce-team",
+                    "releaseChannel": {
+                        "channel": "UNSPECIFIED"
+                    },
+                    "resourceLabels": {
+                        "cost-center": "pulumi-codefresh"
+                    },
+                    "resourceUsageExportConfig": null,
+                    "selfLink": "https://container.googleapis.com/v1beta1/projects/pulumi-ce-team/zones/us-central1-a/clusters/pulumi-codefresh-k8s-1f6eea7",
+                    "servicesIpv4Cidr": "10.3.240.0/20",
+                    "subnetwork": "projects/pulumi-ce-team/regions/us-central1/subnetworks/default",
+                    "tpuIpv4CidrBlock": "",
+                    "verticalPodAutoscaling": null,
+                    "workloadIdentityConfig": null
+                },
+                "parent": "urn:pulumi:staging::pulumi-codefresh::custom:x:GkeCluster::pulumi-codefresh",
+                "dependencies": [
+                    "urn:pulumi:staging::pulumi-codefresh::custom:x:GkeCluster$random:index/randomPassword:RandomPassword::pulumi-codefresh-pwd"
+                ],
+                "provider": "urn:pulumi:staging::pulumi-codefresh::pulumi:providers:gcp::default_4_0_0::a94187b3-4931-4d7d-b909-d211b2781150",
+                "propertyDependencies": {
+                    "initialNodeCount": null,
+                    "masterAuth": [
+                        "urn:pulumi:staging::pulumi-codefresh::custom:x:GkeCluster$random:index/randomPassword:RandomPassword::pulumi-codefresh-pwd"
+                    ],
+                    "minMasterVersion": null,
+                    "nodeConfig": null,
+                    "nodeVersion": null,
+                    "resourceLabels": null
+                }
+            },
+            {
+                "urn": "urn:pulumi:staging::pulumi-codefresh::custom:x:GkeCluster$gcp:container/cluster:Cluster$pulumi:providers:kubernetes::pulumi-codefresh",
+                "custom": true,
+                "id": "a7f52a6c-36ea-4a5f-9299-c5367f01075a",
+                "type": "pulumi:providers:kubernetes",
+                "inputs": {
+                    "kubeconfig": "apiVersion: v1\nclusters:\n- cluster:\n    certificate-authority-data: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURLakNDQWhLZ0F3SUJBZ0lRR3hPWnZ0clEySDdxSlJFblgyZFJMekFOQmdrcWhraUc5dzBCQVFzRkFEQXYKTVMwd0t3WURWUVFERXlRNU16ZzFNVFF5TXkxa09USXdMVFEzWW1JdFlqYzJNQzAyTkRnM05qYzJNVE15WTJJdwpIaGNOTWpFd01URTVNakkxTVRBeldoY05Nall3TVRFNE1qTTFNVEF6V2pBdk1TMHdLd1lEVlFRREV5UTVNemcxCk1UUXlNeTFrT1RJd0xUUTNZbUl0WWpjMk1DMDJORGczTmpjMk1UTXlZMkl3Z2dFaU1BMEdDU3FHU0liM0RRRUIKQVFVQUE0SUJEd0F3Z2dFS0FvSUJBUURTVCtTWHJWWlQ5VUZpd00wZzBGbnRHenFaeWh1aHRISmkwclVwL2JXdQpBOWVWQXhzZFZlMmtZc0RrREV3TzkvN1lLWDV2bXVZTnhnYUgwN2txUHE1VVZucGFrMkIwTlJldS9OS1MxNzY0CjA2VmNvNkN4c2lxUWVPbGJMU1ZpNXlXWi9sOGhzdFNhSGJJdllOR2VaU09YbFN5UUE3L3pwdVZoMGl1bjhNUHMKejVFQ1RUaGhQQlBYZW4wSXp6TnRPOXE2THVoOElEcmN5eXhmQ2hSR2E1a1d2T0ovdkRQSW9saUh2aytoVEM2NApUZkgySkNCbTFWcmlIanBQSFUvTGpxdjZmRytUdStIVHhTVThjdjkzSG9WZU9oVlJRUDZNTERodUI5YUM4U0hPCnZWbkRHaWVzeCtoYVZXdXVFWW9UUmZQM3FnMWYrQlN2QXYyaEhpMDNaYkNYQWdNQkFBR2pRakJBTUE0R0ExVWQKRHdFQi93UUVBd0lDQkRBUEJnTlZIUk1CQWY4RUJUQURBUUgvTUIwR0ExVWREZ1FXQkJUUGo1SWdMdmFXdjlkdgp6ZGdYL1BXdGZLdUdzekFOQmdrcWhraUc5dzBCQVFzRkFBT0NBUUVBY3JqYk9OQUtHTGxieVJKVkFlZkhhUmVMCnFnOGFDQVdUVndxaGx5MkUvSlVqaUpRbEhldTQxMTlzV3ArYWo3WGxxcjVRc2Q5SndLMUd4eVp3MlI4Tm1lVUoKQzRWa01MeS9xVW1WaVIvT0o3dExqV3p5dFhodjAyMi9jWUxzcWNkWGtlb1NYdy84NzJGUzJVbkN2L2lyc1l0NgpoSTBpcUZ0LzE2T051dWpIeURSL05EWGdseVE0aWNYcUdrNDduWWE3Y3lVL0txUnlETlorTWgreE4ySjBJSHpMCnVoQURUMTYrck5vempKZ1N2azVDd0lZT2UvUlN6U25vejZhb3Juc0tjY2FpS3R5STc3aTFpY3doVzFVZ1lTd1gKQnBkZEowK2xTcnpSQWFabDA1K2c5UEsxZHZFTVVESEt1c29Sa2Zld1VkY3g3WXNCbHpKMXpRcTQ0Ri9pVXc9PQotLS0tLUVORCBDRVJUSUZJQ0FURS0tLS0tCg==\n    server: https://35.184.248.211\n  name: pulumi-ce-team_us-central1-a_pulumi-codefresh-k8s-1f6eea7\ncontexts:\n- context:\n    cluster: pulumi-ce-team_us-central1-a_pulumi-codefresh-k8s-1f6eea7\n    user: pulumi-ce-team_us-central1-a_pulumi-codefresh-k8s-1f6eea7\n  name: pulumi-ce-team_us-central1-a_pulumi-codefresh-k8s-1f6eea7\ncurrent-context: pulumi-ce-team_us-central1-a_pulumi-codefresh-k8s-1f6eea7\nkind: Config\npreferences: {}\nusers:\n- name: pulumi-ce-team_us-central1-a_pulumi-codefresh-k8s-1f6eea7\n  user:\n    auth-provider:\n      config:\n        cmd-args: config config-helper --format=json\n        cmd-path: gcloud\n        expiry-key: '{.credential.token_expiry}'\n        token-key: '{.credential.access_token}'\n      name: gcp\n",
+                    "version": "2.7.6"
+                },
+                "outputs": {
+                    "kubeconfig": "apiVersion: v1\nclusters:\n- cluster:\n    certificate-authority-data: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURLakNDQWhLZ0F3SUJBZ0lRR3hPWnZ0clEySDdxSlJFblgyZFJMekFOQmdrcWhraUc5dzBCQVFzRkFEQXYKTVMwd0t3WURWUVFERXlRNU16ZzFNVFF5TXkxa09USXdMVFEzWW1JdFlqYzJNQzAyTkRnM05qYzJNVE15WTJJdwpIaGNOTWpFd01URTVNakkxTVRBeldoY05Nall3TVRFNE1qTTFNVEF6V2pBdk1TMHdLd1lEVlFRREV5UTVNemcxCk1UUXlNeTFrT1RJd0xUUTNZbUl0WWpjMk1DMDJORGczTmpjMk1UTXlZMkl3Z2dFaU1BMEdDU3FHU0liM0RRRUIKQVFVQUE0SUJEd0F3Z2dFS0FvSUJBUURTVCtTWHJWWlQ5VUZpd00wZzBGbnRHenFaeWh1aHRISmkwclVwL2JXdQpBOWVWQXhzZFZlMmtZc0RrREV3TzkvN1lLWDV2bXVZTnhnYUgwN2txUHE1VVZucGFrMkIwTlJldS9OS1MxNzY0CjA2VmNvNkN4c2lxUWVPbGJMU1ZpNXlXWi9sOGhzdFNhSGJJdllOR2VaU09YbFN5UUE3L3pwdVZoMGl1bjhNUHMKejVFQ1RUaGhQQlBYZW4wSXp6TnRPOXE2THVoOElEcmN5eXhmQ2hSR2E1a1d2T0ovdkRQSW9saUh2aytoVEM2NApUZkgySkNCbTFWcmlIanBQSFUvTGpxdjZmRytUdStIVHhTVThjdjkzSG9WZU9oVlJRUDZNTERodUI5YUM4U0hPCnZWbkRHaWVzeCtoYVZXdXVFWW9UUmZQM3FnMWYrQlN2QXYyaEhpMDNaYkNYQWdNQkFBR2pRakJBTUE0R0ExVWQKRHdFQi93UUVBd0lDQkRBUEJnTlZIUk1CQWY4RUJUQURBUUgvTUIwR0ExVWREZ1FXQkJUUGo1SWdMdmFXdjlkdgp6ZGdYL1BXdGZLdUdzekFOQmdrcWhraUc5dzBCQVFzRkFBT0NBUUVBY3JqYk9OQUtHTGxieVJKVkFlZkhhUmVMCnFnOGFDQVdUVndxaGx5MkUvSlVqaUpRbEhldTQxMTlzV3ArYWo3WGxxcjVRc2Q5SndLMUd4eVp3MlI4Tm1lVUoKQzRWa01MeS9xVW1WaVIvT0o3dExqV3p5dFhodjAyMi9jWUxzcWNkWGtlb1NYdy84NzJGUzJVbkN2L2lyc1l0NgpoSTBpcUZ0LzE2T051dWpIeURSL05EWGdseVE0aWNYcUdrNDduWWE3Y3lVL0txUnlETlorTWgreE4ySjBJSHpMCnVoQURUMTYrck5vempKZ1N2azVDd0lZT2UvUlN6U25vejZhb3Juc0tjY2FpS3R5STc3aTFpY3doVzFVZ1lTd1gKQnBkZEowK2xTcnpSQWFabDA1K2c5UEsxZHZFTVVESEt1c29Sa2Zld1VkY3g3WXNCbHpKMXpRcTQ0Ri9pVXc9PQotLS0tLUVORCBDRVJUSUZJQ0FURS0tLS0tCg==\n    server: https://35.184.248.211\n  name: pulumi-ce-team_us-central1-a_pulumi-codefresh-k8s-1f6eea7\ncontexts:\n- context:\n    cluster: pulumi-ce-team_us-central1-a_pulumi-codefresh-k8s-1f6eea7\n    user: pulumi-ce-team_us-central1-a_pulumi-codefresh-k8s-1f6eea7\n  name: pulumi-ce-team_us-central1-a_pulumi-codefresh-k8s-1f6eea7\ncurrent-context: pulumi-ce-team_us-central1-a_pulumi-codefresh-k8s-1f6eea7\nkind: Config\npreferences: {}\nusers:\n- name: pulumi-ce-team_us-central1-a_pulumi-codefresh-k8s-1f6eea7\n  user:\n    auth-provider:\n      config:\n        cmd-args: config config-helper --format=json\n        cmd-path: gcloud\n        expiry-key: '{.credential.token_expiry}'\n        token-key: '{.credential.access_token}'\n      name: gcp\n",
+                    "version": "2.7.6"
+                },
+                "parent": "urn:pulumi:staging::pulumi-codefresh::custom:x:GkeCluster$gcp:container/cluster:Cluster::pulumi-codefresh-k8s",
+                "dependencies": [
+                    "urn:pulumi:staging::pulumi-codefresh::custom:x:GkeCluster$gcp:container/cluster:Cluster::pulumi-codefresh-k8s"
+                ],
+                "propertyDependencies": {
+                    "kubeconfig": [
+                        "urn:pulumi:staging::pulumi-codefresh::custom:x:GkeCluster$gcp:container/cluster:Cluster::pulumi-codefresh-k8s"
+                    ]
+                }
+            },
+            {
+                "urn": "urn:pulumi:staging::pulumi-codefresh::pulumi:providers:pulumi-nodejs::default",
+                "custom": true,
+                "id": "ae753036-4e13-4bb1-b5a6-55231bb82961",
+                "type": "pulumi:providers:pulumi-nodejs"
+            },
+            {
+                "urn": "urn:pulumi:staging::pulumi-codefresh::kubernetes:core/v1:Namespace::pulumi-codefresh",
+                "custom": true,
+                "id": "pulumi-codefresh",
+                "type": "kubernetes:core/v1:Namespace",
+                "inputs": {
+                    "apiVersion": "v1",
+                    "kind": "Namespace",
+                    "metadata": {
+                        "labels": {
+                            "app.kubernetes.io/managed-by": "pulumi"
+                        },
+                        "name": "pulumi-codefresh"
+                    }
+                },
+                "outputs": {
+                    "__initialApiVersion": "v1",
+                    "__inputs": {
+                        "apiVersion": "v1",
+                        "kind": "Namespace",
+                        "metadata": {
+                            "labels": {
+                                "app.kubernetes.io/managed-by": "pulumi"
+                            },
+                            "name": "pulumi-codefresh"
+                        }
+                    },
+                    "apiVersion": "v1",
+                    "kind": "Namespace",
+                    "metadata": {
+                        "annotations": {
+                            "kubectl.kubernetes.io/last-applied-configuration": "{\"apiVersion\":\"v1\",\"kind\":\"Namespace\",\"metadata\":{\"labels\":{\"app.kubernetes.io/managed-by\":\"pulumi\"},\"name\":\"pulumi-codefresh\"}}\n"
+                        },
+                        "creationTimestamp": "2021-01-19T23:54:22Z",
+                        "labels": {
+                            "app.kubernetes.io/managed-by": "pulumi"
+                        },
+                        "name": "pulumi-codefresh",
+                        "resourceVersion": "810",
+                        "selfLink": "/api/v1/namespaces/pulumi-codefresh",
+                        "uid": "5d0454fb-37ab-40ab-b307-46aadf09ba2a"
+                    },
+                    "spec": {
+                        "finalizers": [
+                            "kubernetes"
+                        ]
+                    },
+                    "status": {
+                        "phase": "Active"
+                    }
+                },
+                "parent": "urn:pulumi:staging::pulumi-codefresh::pulumi:pulumi:Stack::pulumi-codefresh-staging",
+                "dependencies": [
+                    "urn:pulumi:staging::pulumi-codefresh::custom:x:GkeCluster$gcp:container/cluster:Cluster::pulumi-codefresh-k8s",
+                    "urn:pulumi:staging::pulumi-codefresh::custom:x:GkeCluster$gcp:storage/bucket:Bucket::pulumi-codefresh-bucket",
+                    "urn:pulumi:staging::pulumi-codefresh::custom:x:GkeCluster$random:index/randomPassword:RandomPassword::pulumi-codefresh-pwd"
+                ],
+                "provider": "urn:pulumi:staging::pulumi-codefresh::custom:x:GkeCluster$gcp:container/cluster:Cluster$pulumi:providers:kubernetes::pulumi-codefresh::a7f52a6c-36ea-4a5f-9299-c5367f01075a",
+                "propertyDependencies": {
+                    "apiVersion": null,
+                    "kind": null,
+                    "metadata": null
+                }
+            },
+            {
+                "urn": "urn:pulumi:staging::pulumi-codefresh::pulumi-nodejs:dynamic:Resource::gke-cf-dash",
+                "custom": true,
+                "id": "600772e99a7ccfff2d97a145",
+                "type": "pulumi-nodejs:dynamic:Resource",
+                "inputs": {
+                    "__provider": "exports.handler = __f0;\n\nvar __provider = {create: __f1, delete: __f3};\n\nfunction __f2(__0, __1, __2, __3) {\n  return (function() {\n    with({  }) {\n\nreturn function (thisArg, _arguments, P, generator) {\n    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }\n    return new (P || (P = Promise))(function (resolve, reject) {\n        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }\n        function rejected(value) { try { step(generator[\"throw\"](value)); } catch (e) { reject(e); } }\n        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }\n        step((generator = generator.apply(thisArg, _arguments || [])).next());\n    });\n};\n\n    }\n  }).apply(undefined, undefined).apply(this, arguments);\n}\n\nfunction __f1(__0) {\n  return (function() {\n    with({ __awaiter: __f2, gcp: require(\"@pulumi/gcp/index.js\"), codefreshApiUrl: \"https://g.codefresh.io/api\", codefreshApiKey: \"5ff732212d43867c90b98c78.6dc4ac48b53141667afea1a100895bcf\", axios_1: require(\"axios/index.js\") }) {\n\nreturn function /*create*/(inputs) {\n        return __awaiter(this, void 0, void 0, function* () {\n            const clusterName = inputs.clusterName;\n            const gcpProject = gcp.config.project; //inputs.gcpProject\n            const gkeName = `${clusterName}@${gcpProject}`;\n            const url = `${codefreshApiUrl}/clusters/gcloud/cluster`;\n            const headers = {\n                'Authorization': codefreshApiKey,\n                'content-type': 'application/json;charset=UTF-8',\n            };\n            const data = {\n                project: {\n                    name: gcpProject,\n                    value: gcpProject,\n                    ticked: true\n                },\n                cluster: {\n                    name: clusterName,\n                    ticked: true\n                },\n                name: gkeName\n            };\n            const createResults = yield axios_1.default.post(url, {\n                selector: gkeName,\n                provider: \"gcloud\",\n                data: data\n            }, {\n                headers: headers\n            });\n            return { id: createResults.data._id.toString(), outs: { fullClusterName: \"gooname\" } };\n        });\n    };\n\n    }\n  }).apply(undefined, undefined).apply(this, arguments);\n}\n\nfunction __f3(__0) {\n  return (function() {\n    with({ __awaiter: __f2, codefreshApiUrl: \"https://g.codefresh.io/api\", codefreshApiKey: \"5ff732212d43867c90b98c78.6dc4ac48b53141667afea1a100895bcf\", axios_1: require(\"axios/index.js\") }) {\n\nreturn function /*delete*/(id) {\n        return __awaiter(this, void 0, void 0, function* () {\n            const deleteApiUrl = `${codefreshApiUrl}/clusters/local/cluster/${id}`;\n            const headers = {\n                'Authorization': codefreshApiKey\n            };\n            const deleteResults = yield axios_1.default.delete(deleteApiUrl, {\n                headers: headers\n            });\n        });\n    };\n\n    }\n  }).apply(undefined, undefined).apply(this, arguments);\n}\n\nfunction __f0() {\n  return (function() {\n    with({ provider: __provider }) {\n\nreturn () =\u003e provider;\n\n    }\n  }).apply(undefined, undefined).apply(this, arguments);\n}\n",
+                    "clusterName": "pulumi-codefresh-k8s-1f6eea7"
+                },
+                "outputs": {
+                    "__provider": "exports.handler = __f0;\n\nvar __provider = {create: __f1, delete: __f3};\n\nfunction __f2(__0, __1, __2, __3) {\n  return (function() {\n    with({  }) {\n\nreturn function (thisArg, _arguments, P, generator) {\n    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }\n    return new (P || (P = Promise))(function (resolve, reject) {\n        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }\n        function rejected(value) { try { step(generator[\"throw\"](value)); } catch (e) { reject(e); } }\n        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }\n        step((generator = generator.apply(thisArg, _arguments || [])).next());\n    });\n};\n\n    }\n  }).apply(undefined, undefined).apply(this, arguments);\n}\n\nfunction __f1(__0) {\n  return (function() {\n    with({ __awaiter: __f2, gcp: require(\"@pulumi/gcp/index.js\"), codefreshApiUrl: \"https://g.codefresh.io/api\", codefreshApiKey: \"5ff732212d43867c90b98c78.6dc4ac48b53141667afea1a100895bcf\", axios_1: require(\"axios/index.js\") }) {\n\nreturn function /*create*/(inputs) {\n        return __awaiter(this, void 0, void 0, function* () {\n            const clusterName = inputs.clusterName;\n            const gcpProject = gcp.config.project; //inputs.gcpProject\n            const gkeName = `${clusterName}@${gcpProject}`;\n            const url = `${codefreshApiUrl}/clusters/gcloud/cluster`;\n            const headers = {\n                'Authorization': codefreshApiKey,\n                'content-type': 'application/json;charset=UTF-8',\n            };\n            const data = {\n                project: {\n                    name: gcpProject,\n                    value: gcpProject,\n                    ticked: true\n                },\n                cluster: {\n                    name: clusterName,\n                    ticked: true\n                },\n                name: gkeName\n            };\n            const createResults = yield axios_1.default.post(url, {\n                selector: gkeName,\n                provider: \"gcloud\",\n                data: data\n            }, {\n                headers: headers\n            });\n            return { id: createResults.data._id.toString(), outs: { fullClusterName: \"gooname\" } };\n        });\n    };\n\n    }\n  }).apply(undefined, undefined).apply(this, arguments);\n}\n\nfunction __f3(__0) {\n  return (function() {\n    with({ __awaiter: __f2, codefreshApiUrl: \"https://g.codefresh.io/api\", codefreshApiKey: \"5ff732212d43867c90b98c78.6dc4ac48b53141667afea1a100895bcf\", axios_1: require(\"axios/index.js\") }) {\n\nreturn function /*delete*/(id) {\n        return __awaiter(this, void 0, void 0, function* () {\n            const deleteApiUrl = `${codefreshApiUrl}/clusters/local/cluster/${id}`;\n            const headers = {\n                'Authorization': codefreshApiKey\n            };\n            const deleteResults = yield axios_1.default.delete(deleteApiUrl, {\n                headers: headers\n            });\n        });\n    };\n\n    }\n  }).apply(undefined, undefined).apply(this, arguments);\n}\n\nfunction __f0() {\n  return (function() {\n    with({ provider: __provider }) {\n\nreturn () =\u003e provider;\n\n    }\n  }).apply(undefined, undefined).apply(this, arguments);\n}\n"
+                },
+                "parent": "urn:pulumi:staging::pulumi-codefresh::pulumi:pulumi:Stack::pulumi-codefresh-staging",
+                "dependencies": [
+                    "urn:pulumi:staging::pulumi-codefresh::custom:x:GkeCluster$gcp:container/cluster:Cluster::pulumi-codefresh-k8s"
+                ],
+                "provider": "urn:pulumi:staging::pulumi-codefresh::pulumi:providers:pulumi-nodejs::default::ae753036-4e13-4bb1-b5a6-55231bb82961",
+                "propertyDependencies": {
+                    "__provider": null,
+                    "clusterName": [
+                        "urn:pulumi:staging::pulumi-codefresh::custom:x:GkeCluster$gcp:container/cluster:Cluster::pulumi-codefresh-k8s"
+                    ]
+                }
+            },
+            {
+                "urn": "urn:pulumi:staging::pulumi-codefresh::kubernetes:core/v1:Namespace$kubernetes:helm.sh/v3:Chart::pulumi-codefresh-website",
+                "custom": false,
+                "type": "kubernetes:helm.sh/v3:Chart",
+                "parent": "urn:pulumi:staging::pulumi-codefresh::kubernetes:core/v1:Namespace::pulumi-codefresh",
+                "aliases": [
+                    "urn:pulumi:staging::pulumi-codefresh::kubernetes:core/v1:Namespace$kubernetes:helm.sh/v2:Chart::pulumi-codefresh-website"
+                ]
+            },
+            {
+                "urn": "urn:pulumi:staging::pulumi-codefresh::pulumi:providers:kubernetes::default_2_7_6",
+                "custom": true,
+                "id": "33272d51-b539-4926-8e01-1bf696619008",
+                "type": "pulumi:providers:kubernetes",
+                "inputs": {
+                    "version": "2.7.6"
+                },
+                "outputs": {
+                    "version": "2.7.6"
+                }
+            },
+            {
+                "urn": "urn:pulumi:staging::pulumi-codefresh::kubernetes:core/v1:ConfigMap::pulumi-codefresh",
+                "custom": true,
+                "id": "pulumi-codefresh/pulumi-codefresh-3kt15d9k",
+                "type": "kubernetes:core/v1:ConfigMap",
+                "inputs": {
+                    "apiVersion": "v1",
+                    "data": {
+                        "storageBucketName": "pulumi-codefresh-bucket-732ab2f"
+                    },
+                    "kind": "ConfigMap",
+                    "metadata": {
+                        "annotations": {
+                            "pulumi.com/autonamed": "true"
+                        },
+                        "labels": {
+                            "app.kubernetes.io/managed-by": "pulumi"
+                        },
+                        "name": "pulumi-codefresh-3kt15d9k",
+                        "namespace": "pulumi-codefresh"
+                    }
+                },
+                "outputs": {
+                    "__initialApiVersion": "v1",
+                    "__inputs": {
+                        "apiVersion": "v1",
+                        "data": {
+                            "storageBucketName": "pulumi-codefresh-bucket-732ab2f"
+                        },
+                        "kind": "ConfigMap",
+                        "metadata": {
+                            "annotations": {
+                                "pulumi.com/autonamed": "true"
+                            },
+                            "labels": {
+                                "app.kubernetes.io/managed-by": "pulumi"
+                            },
+                            "name": "pulumi-codefresh-3kt15d9k",
+                            "namespace": "pulumi-codefresh"
+                        }
+                    },
+                    "apiVersion": "v1",
+                    "data": {
+                        "storageBucketName": "pulumi-codefresh-bucket-732ab2f"
+                    },
+                    "kind": "ConfigMap",
+                    "metadata": {
+                        "annotations": {
+                            "kubectl.kubernetes.io/last-applied-configuration": "{\"apiVersion\":\"v1\",\"data\":{\"storageBucketName\":\"pulumi-codefresh-bucket-732ab2f\"},\"kind\":\"ConfigMap\",\"metadata\":{\"annotations\":{\"pulumi.com/autonamed\":\"true\"},\"labels\":{\"app.kubernetes.io/managed-by\":\"pulumi\"},\"name\":\"pulumi-codefresh-3kt15d9k\",\"namespace\":\"pulumi-codefresh\"}}\n",
+                            "pulumi.com/autonamed": "true"
+                        },
+                        "creationTimestamp": "2021-01-19T23:54:23Z",
+                        "labels": {
+                            "app.kubernetes.io/managed-by": "pulumi"
+                        },
+                        "name": "pulumi-codefresh-3kt15d9k",
+                        "namespace": "pulumi-codefresh",
+                        "resourceVersion": "824",
+                        "selfLink": "/api/v1/namespaces/pulumi-codefresh/configmaps/pulumi-codefresh-3kt15d9k",
+                        "uid": "4f7ffbd2-f376-4487-b547-f896bd531579"
+                    }
+                },
+                "parent": "urn:pulumi:staging::pulumi-codefresh::pulumi:pulumi:Stack::pulumi-codefresh-staging",
+                "dependencies": [
+                    "urn:pulumi:staging::pulumi-codefresh::custom:x:GkeCluster$gcp:storage/bucket:Bucket::pulumi-codefresh-bucket",
+                    "urn:pulumi:staging::pulumi-codefresh::kubernetes:core/v1:Namespace::pulumi-codefresh"
+                ],
+                "provider": "urn:pulumi:staging::pulumi-codefresh::custom:x:GkeCluster$gcp:container/cluster:Cluster$pulumi:providers:kubernetes::pulumi-codefresh::a7f52a6c-36ea-4a5f-9299-c5367f01075a",
+                "propertyDependencies": {
+                    "apiVersion": null,
+                    "data": [
+                        "urn:pulumi:staging::pulumi-codefresh::custom:x:GkeCluster$gcp:storage/bucket:Bucket::pulumi-codefresh-bucket"
+                    ],
+                    "kind": null,
+                    "metadata": [
+                        "urn:pulumi:staging::pulumi-codefresh::kubernetes:core/v1:Namespace::pulumi-codefresh"
+                    ]
+                }
+            },
+            {
+                "urn": "urn:pulumi:staging::pulumi-codefresh::kubernetes:core/v1:Namespace$kubernetes:apps/v1:Deployment::pulumi-codefresh",
+                "custom": true,
+                "id": "pulumi-codefresh/pulumi-codefresh-kx4xc23k",
+                "type": "kubernetes:apps/v1:Deployment",
+                "inputs": {
+                    "apiVersion": "apps/v1",
+                    "kind": "Deployment",
+                    "metadata": {
+                        "annotations": {
+                            "pulumi.com/autonamed": "true"
+                        },
+                        "labels": {
+                            "app.kubernetes.io/managed-by": "pulumi",
+                            "appClass": "pulumi-codefresh"
+                        },
+                        "name": "pulumi-codefresh-kx4xc23k",
+                        "namespace": "pulumi-codefresh"
+                    },
+                    "spec": {
+                        "replicas": 1,
+                        "selector": {
+                            "matchLabels": {
+                                "appClass": "pulumi-codefresh"
+                            }
+                        },
+                        "template": {
+                            "metadata": {
+                                "labels": {
+                                    "appClass": "pulumi-codefresh"
+                                }
+                            },
+                            "spec": {
+                                "containers": [
+                                    {
+                                        "envFrom": [
+                                            {
+                                                "configMapRef": {
+                                                    "name": "pulumi-codefresh-3kt15d9k"
+                                                }
+                                            }
+                                        ],
+                                        "image": "nginx:1.18",
+                                        "name": "pulumi-codefresh",
+                                        "ports": [
+                                            {
+                                                "containerPort": 80,
+                                                "name": "http"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                },
+                "outputs": {
+                    "__initialApiVersion": "apps/v1",
+                    "__inputs": {
+                        "apiVersion": "apps/v1",
+                        "kind": "Deployment",
+                        "metadata": {
+                            "annotations": {
+                                "pulumi.com/autonamed": "true"
+                            },
+                            "labels": {
+                                "app.kubernetes.io/managed-by": "pulumi",
+                                "appClass": "pulumi-codefresh"
+                            },
+                            "name": "pulumi-codefresh-kx4xc23k",
+                            "namespace": "pulumi-codefresh"
+                        },
+                        "spec": {
+                            "replicas": 1,
+                            "selector": {
+                                "matchLabels": {
+                                    "appClass": "pulumi-codefresh"
+                                }
+                            },
+                            "template": {
+                                "metadata": {
+                                    "labels": {
+                                        "appClass": "pulumi-codefresh"
+                                    }
+                                },
+                                "spec": {
+                                    "containers": [
+                                        {
+                                            "envFrom": [
+                                                {
+                                                    "configMapRef": {
+                                                        "name": "pulumi-codefresh-3kt15d9k"
+                                                    }
+                                                }
+                                            ],
+                                            "image": "nginx:1.18",
+                                            "name": "pulumi-codefresh",
+                                            "ports": [
+                                                {
+                                                    "containerPort": 80,
+                                                    "name": "http"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "apiVersion": "apps/v1",
+                    "kind": "Deployment",
+                    "metadata": {
+                        "annotations": {
+                            "deployment.kubernetes.io/revision": "1",
+                            "kubectl.kubernetes.io/last-applied-configuration": "{\"apiVersion\":\"apps/v1\",\"kind\":\"Deployment\",\"metadata\":{\"annotations\":{\"pulumi.com/autonamed\":\"true\"},\"labels\":{\"app.kubernetes.io/managed-by\":\"pulumi\",\"appClass\":\"pulumi-codefresh\"},\"name\":\"pulumi-codefresh-kx4xc23k\",\"namespace\":\"pulumi-codefresh\"},\"spec\":{\"replicas\":1,\"selector\":{\"matchLabels\":{\"appClass\":\"pulumi-codefresh\"}},\"template\":{\"metadata\":{\"labels\":{\"appClass\":\"pulumi-codefresh\"}},\"spec\":{\"containers\":[{\"envFrom\":[{\"configMapRef\":{\"name\":\"pulumi-codefresh-3kt15d9k\"}}],\"image\":\"nginx:1.18\",\"name\":\"pulumi-codefresh\",\"ports\":[{\"containerPort\":80,\"name\":\"http\"}]}]}}}}\n",
+                            "pulumi.com/autonamed": "true"
+                        },
+                        "creationTimestamp": "2021-01-19T23:54:23Z",
+                        "generation": 1,
+                        "labels": {
+                            "app.kubernetes.io/managed-by": "pulumi",
+                            "appClass": "pulumi-codefresh"
+                        },
+                        "name": "pulumi-codefresh-kx4xc23k",
+                        "namespace": "pulumi-codefresh",
+                        "resourceVersion": "1128",
+                        "selfLink": "/apis/apps/v1/namespaces/pulumi-codefresh/deployments/pulumi-codefresh-kx4xc23k",
+                        "uid": "0cf8e446-def3-455e-8113-fc5d98d71671"
+                    },
+                    "spec": {
+                        "progressDeadlineSeconds": 600,
+                        "replicas": 1,
+                        "revisionHistoryLimit": 10,
+                        "selector": {
+                            "matchLabels": {
+                                "appClass": "pulumi-codefresh"
+                            }
+                        },
+                        "strategy": {
+                            "rollingUpdate": {
+                                "maxSurge": "25%",
+                                "maxUnavailable": "25%"
+                            },
+                            "type": "RollingUpdate"
+                        },
+                        "template": {
+                            "metadata": {
+                                "labels": {
+                                    "appClass": "pulumi-codefresh"
+                                }
+                            },
+                            "spec": {
+                                "containers": [
+                                    {
+                                        "envFrom": [
+                                            {
+                                                "configMapRef": {
+                                                    "name": "pulumi-codefresh-3kt15d9k"
+                                                }
+                                            }
+                                        ],
+                                        "image": "nginx:1.18",
+                                        "imagePullPolicy": "IfNotPresent",
+                                        "name": "pulumi-codefresh",
+                                        "ports": [
+                                            {
+                                                "containerPort": 80,
+                                                "name": "http",
+                                                "protocol": "TCP"
+                                            }
+                                        ],
+                                        "resources": {},
+                                        "terminationMessagePath": "/dev/termination-log",
+                                        "terminationMessagePolicy": "File"
+                                    }
+                                ],
+                                "dnsPolicy": "ClusterFirst",
+                                "restartPolicy": "Always",
+                                "schedulerName": "default-scheduler",
+                                "securityContext": {},
+                                "terminationGracePeriodSeconds": 30
+                            }
+                        }
+                    },
+                    "status": {
+                        "availableReplicas": 1,
+                        "conditions": [
+                            {
+                                "lastTransitionTime": "2021-01-19T23:55:02Z",
+                                "lastUpdateTime": "2021-01-19T23:55:02Z",
+                                "message": "Deployment has minimum availability.",
+                                "reason": "MinimumReplicasAvailable",
+                                "status": "True",
+                                "type": "Available"
+                            },
+                            {
+                                "lastTransitionTime": "2021-01-19T23:54:23Z",
+                                "lastUpdateTime": "2021-01-19T23:55:02Z",
+                                "message": "ReplicaSet \"pulumi-codefresh-kx4xc23k-7554b6cf46\" has successfully progressed.",
+                                "reason": "NewReplicaSetAvailable",
+                                "status": "True",
+                                "type": "Progressing"
+                            }
+                        ],
+                        "observedGeneration": 1,
+                        "readyReplicas": 1,
+                        "replicas": 1,
+                        "updatedReplicas": 1
+                    }
+                },
+                "parent": "urn:pulumi:staging::pulumi-codefresh::kubernetes:core/v1:Namespace::pulumi-codefresh",
+                "dependencies": [
+                    "urn:pulumi:staging::pulumi-codefresh::kubernetes:core/v1:ConfigMap::pulumi-codefresh",
+                    "urn:pulumi:staging::pulumi-codefresh::kubernetes:core/v1:Namespace::pulumi-codefresh"
+                ],
+                "provider": "urn:pulumi:staging::pulumi-codefresh::custom:x:GkeCluster$gcp:container/cluster:Cluster$pulumi:providers:kubernetes::pulumi-codefresh::a7f52a6c-36ea-4a5f-9299-c5367f01075a",
+                "propertyDependencies": {
+                    "apiVersion": null,
+                    "kind": null,
+                    "metadata": [
+                        "urn:pulumi:staging::pulumi-codefresh::kubernetes:core/v1:Namespace::pulumi-codefresh"
+                    ],
+                    "spec": [
+                        "urn:pulumi:staging::pulumi-codefresh::kubernetes:core/v1:ConfigMap::pulumi-codefresh"
+                    ]
+                },
+                "aliases": [
+                    "urn:pulumi:staging::pulumi-codefresh::kubernetes:core/v1:Namespace$kubernetes:apps/v1beta1:Deployment::pulumi-codefresh",
+                    "urn:pulumi:staging::pulumi-codefresh::kubernetes:core/v1:Namespace$kubernetes:apps/v1beta2:Deployment::pulumi-codefresh",
+                    "urn:pulumi:staging::pulumi-codefresh::kubernetes:core/v1:Namespace$kubernetes:extensions/v1beta1:Deployment::pulumi-codefresh"
+                ]
+            },
+            {
+                "urn": "urn:pulumi:staging::pulumi-codefresh::kubernetes:core/v1:Namespace$kubernetes:apps/v1:Deployment$kubernetes:core/v1:Service::pulumi-codefresh-nginx-lb",
+                "custom": true,
+                "id": "pulumi-codefresh/pulumi-codefresh-nginx-lb-wejnj7m4",
+                "type": "kubernetes:core/v1:Service",
+                "inputs": {
+                    "apiVersion": "v1",
+                    "kind": "Service",
+                    "metadata": {
+                        "annotations": {
+                            "pulumi.com/autonamed": "true"
+                        },
+                        "labels": {
+                            "app.kubernetes.io/managed-by": "pulumi",
+                            "appClass": "pulumi-codefresh"
+                        },
+                        "name": "pulumi-codefresh-nginx-lb-wejnj7m4",
+                        "namespace": "pulumi-codefresh"
+                    },
+                    "spec": {
+                        "ports": [
+                            {
+                                "port": 80,
+                                "targetPort": "http"
+                            }
+                        ],
+                        "selector": {
+                            "appClass": "pulumi-codefresh"
+                        },
+                        "type": "LoadBalancer"
+                    }
+                },
+                "outputs": {
+                    "__initialApiVersion": "v1",
+                    "__inputs": {
+                        "apiVersion": "v1",
+                        "kind": "Service",
+                        "metadata": {
+                            "annotations": {
+                                "pulumi.com/autonamed": "true"
+                            },
+                            "labels": {
+                                "app.kubernetes.io/managed-by": "pulumi",
+                                "appClass": "pulumi-codefresh"
+                            },
+                            "name": "pulumi-codefresh-nginx-lb-wejnj7m4",
+                            "namespace": "pulumi-codefresh"
+                        },
+                        "spec": {
+                            "ports": [
+                                {
+                                    "port": 80,
+                                    "targetPort": "http"
+                                }
+                            ],
+                            "selector": {
+                                "appClass": "pulumi-codefresh"
+                            },
+                            "type": "LoadBalancer"
+                        }
+                    },
+                    "apiVersion": "v1",
+                    "kind": "Service",
+                    "metadata": {
+                        "annotations": {
+                            "kubectl.kubernetes.io/last-applied-configuration": "{\"apiVersion\":\"v1\",\"kind\":\"Service\",\"metadata\":{\"annotations\":{\"pulumi.com/autonamed\":\"true\"},\"labels\":{\"app.kubernetes.io/managed-by\":\"pulumi\",\"appClass\":\"pulumi-codefresh\"},\"name\":\"pulumi-codefresh-nginx-lb-wejnj7m4\",\"namespace\":\"pulumi-codefresh\"},\"spec\":{\"ports\":[{\"port\":80,\"targetPort\":\"http\"}],\"selector\":{\"appClass\":\"pulumi-codefresh\"},\"type\":\"LoadBalancer\"}}\n",
+                            "pulumi.com/autonamed": "true"
+                        },
+                        "creationTimestamp": "2021-01-19T23:55:02Z",
+                        "finalizers": [
+                            "service.kubernetes.io/load-balancer-cleanup"
+                        ],
+                        "labels": {
+                            "app.kubernetes.io/managed-by": "pulumi",
+                            "appClass": "pulumi-codefresh"
+                        },
+                        "name": "pulumi-codefresh-nginx-lb-wejnj7m4",
+                        "namespace": "pulumi-codefresh",
+                        "resourceVersion": "1336",
+                        "selfLink": "/api/v1/namespaces/pulumi-codefresh/services/pulumi-codefresh-nginx-lb-wejnj7m4",
+                        "uid": "be78a7b2-0aad-4136-81e4-e86a3ef871a2"
+                    },
+                    "spec": {
+                        "clusterIP": "10.3.242.78",
+                        "externalTrafficPolicy": "Cluster",
+                        "ports": [
+                            {
+                                "nodePort": 30608,
+                                "port": 80,
+                                "protocol": "TCP",
+                                "targetPort": "http"
+                            }
+                        ],
+                        "selector": {
+                            "appClass": "pulumi-codefresh"
+                        },
+                        "sessionAffinity": "None",
+                        "type": "LoadBalancer"
+                    },
+                    "status": {
+                        "loadBalancer": {
+                            "ingress": [
+                                {
+                                    "ip": "34.67.97.217"
+                                }
+                            ]
+                        }
+                    }
+                },
+                "parent": "urn:pulumi:staging::pulumi-codefresh::kubernetes:core/v1:Namespace$kubernetes:apps/v1:Deployment::pulumi-codefresh",
+                "dependencies": [
+                    "urn:pulumi:staging::pulumi-codefresh::kubernetes:core/v1:Namespace::pulumi-codefresh"
+                ],
+                "provider": "urn:pulumi:staging::pulumi-codefresh::custom:x:GkeCluster$gcp:container/cluster:Cluster$pulumi:providers:kubernetes::pulumi-codefresh::a7f52a6c-36ea-4a5f-9299-c5367f01075a",
+                "propertyDependencies": {
+                    "apiVersion": null,
+                    "kind": null,
+                    "metadata": [
+                        "urn:pulumi:staging::pulumi-codefresh::kubernetes:core/v1:Namespace::pulumi-codefresh"
+                    ],
+                    "spec": null
+                },
+                "aliases": [
+                    "urn:pulumi:staging::pulumi-codefresh::kubernetes:core/v1:Namespace$kubernetes:apps/v1beta1:Deployment$kubernetes:core/v1:Service::pulumi-codefresh-nginx-lb",
+                    "urn:pulumi:staging::pulumi-codefresh::kubernetes:core/v1:Namespace$kubernetes:apps/v1beta2:Deployment$kubernetes:core/v1:Service::pulumi-codefresh-nginx-lb",
+                    "urn:pulumi:staging::pulumi-codefresh::kubernetes:core/v1:Namespace$kubernetes:extensions/v1beta1:Deployment$kubernetes:core/v1:Service::pulumi-codefresh-nginx-lb"
+                ]
+            },
+            {
+                "urn": "urn:pulumi:staging::pulumi-codefresh::kubernetes:core/v1:Namespace$kubernetes:helm.sh/v3:Chart$kubernetes:core/v1:ConfigMap::pulumi-codefresh/pulumi-codefresh-website-nginx-server-block",
+                "custom": true,
+                "id": "pulumi-codefresh/pulumi-codefresh-website-nginx-server-block",
+                "type": "kubernetes:core/v1:ConfigMap",
+                "inputs": {
+                    "apiVersion": "v1",
+                    "data": {
+                        "server-blocks-paths.conf": "include  \"/opt/bitnami/nginx/conf/server_blocks/ldap/*.conf\";\ninclude  \"/opt/bitnami/nginx/conf/server_blocks/common/*.conf\";"
+                    },
+                    "kind": "ConfigMap",
+                    "metadata": {
+                        "labels": {
+                            "app.kubernetes.io/instance": "pulumi-codefresh-website",
+                            "app.kubernetes.io/managed-by": "pulumi",
+                            "app.kubernetes.io/name": "nginx",
+                            "helm.sh/chart": "nginx-8.2.3"
+                        },
+                        "name": "pulumi-codefresh-website-nginx-server-block",
+                        "namespace": "pulumi-codefresh"
+                    }
+                },
+                "outputs": {
+                    "__initialApiVersion": "v1",
+                    "__inputs": {
+                        "apiVersion": "v1",
+                        "data": {
+                            "server-blocks-paths.conf": "include  \"/opt/bitnami/nginx/conf/server_blocks/ldap/*.conf\";\ninclude  \"/opt/bitnami/nginx/conf/server_blocks/common/*.conf\";"
+                        },
+                        "kind": "ConfigMap",
+                        "metadata": {
+                            "labels": {
+                                "app.kubernetes.io/instance": "pulumi-codefresh-website",
+                                "app.kubernetes.io/managed-by": "pulumi",
+                                "app.kubernetes.io/name": "nginx",
+                                "helm.sh/chart": "nginx-8.2.3"
+                            },
+                            "name": "pulumi-codefresh-website-nginx-server-block",
+                            "namespace": "pulumi-codefresh"
+                        }
+                    },
+                    "apiVersion": "v1",
+                    "data": {
+                        "server-blocks-paths.conf": "include  \"/opt/bitnami/nginx/conf/server_blocks/ldap/*.conf\";\ninclude  \"/opt/bitnami/nginx/conf/server_blocks/common/*.conf\";"
+                    },
+                    "kind": "ConfigMap",
+                    "metadata": {
+                        "annotations": {
+                            "kubectl.kubernetes.io/last-applied-configuration": "{\"apiVersion\":\"v1\",\"data\":{\"server-blocks-paths.conf\":\"include  \\\"/opt/bitnami/nginx/conf/server_blocks/ldap/*.conf\\\";\\ninclude  \\\"/opt/bitnami/nginx/conf/server_blocks/common/*.conf\\\";\"},\"kind\":\"ConfigMap\",\"metadata\":{\"labels\":{\"app.kubernetes.io/instance\":\"pulumi-codefresh-website\",\"app.kubernetes.io/managed-by\":\"pulumi\",\"app.kubernetes.io/name\":\"nginx\",\"helm.sh/chart\":\"nginx-8.2.3\"},\"name\":\"pulumi-codefresh-website-nginx-server-block\",\"namespace\":\"pulumi-codefresh\"}}\n"
+                        },
+                        "creationTimestamp": "2021-01-19T23:54:25Z",
+                        "labels": {
+                            "app.kubernetes.io/instance": "pulumi-codefresh-website",
+                            "app.kubernetes.io/managed-by": "pulumi",
+                            "app.kubernetes.io/name": "nginx",
+                            "helm.sh/chart": "nginx-8.2.3"
+                        },
+                        "name": "pulumi-codefresh-website-nginx-server-block",
+                        "namespace": "pulumi-codefresh",
+                        "resourceVersion": "858",
+                        "selfLink": "/api/v1/namespaces/pulumi-codefresh/configmaps/pulumi-codefresh-website-nginx-server-block",
+                        "uid": "08973aaa-2fbf-447b-82ab-b485b2416d07"
+                    }
+                },
+                "parent": "urn:pulumi:staging::pulumi-codefresh::kubernetes:core/v1:Namespace$kubernetes:helm.sh/v3:Chart::pulumi-codefresh-website",
+                "provider": "urn:pulumi:staging::pulumi-codefresh::custom:x:GkeCluster$gcp:container/cluster:Cluster$pulumi:providers:kubernetes::pulumi-codefresh::a7f52a6c-36ea-4a5f-9299-c5367f01075a",
+                "propertyDependencies": {
+                    "apiVersion": null,
+                    "data": null,
+                    "kind": null,
+                    "metadata": null
+                },
+                "aliases": [
+                    "urn:pulumi:staging::pulumi-codefresh::kubernetes:core/v1:Namespace$kubernetes:helm.sh/v2:Chart$kubernetes:core/v1:ConfigMap::pulumi-codefresh/pulumi-codefresh-website-nginx-server-block"
+                ]
+            },
+            {
+                "urn": "urn:pulumi:staging::pulumi-codefresh::kubernetes:core/v1:Namespace$kubernetes:helm.sh/v3:Chart$kubernetes:core/v1:Service::pulumi-codefresh/pulumi-codefresh-website-nginx",
+                "custom": true,
+                "id": "pulumi-codefresh/pulumi-codefresh-website-nginx",
+                "type": "kubernetes:core/v1:Service",
+                "inputs": {
+                    "apiVersion": "v1",
+                    "kind": "Service",
+                    "metadata": {
+                        "labels": {
+                            "app.kubernetes.io/instance": "pulumi-codefresh-website",
+                            "app.kubernetes.io/managed-by": "pulumi",
+                            "app.kubernetes.io/name": "nginx",
+                            "helm.sh/chart": "nginx-8.2.3"
+                        },
+                        "name": "pulumi-codefresh-website-nginx",
+                        "namespace": "pulumi-codefresh"
+                    },
+                    "spec": {
+                        "externalTrafficPolicy": "Cluster",
+                        "ports": [
+                            {
+                                "name": "http",
+                                "port": 80,
+                                "targetPort": "http"
+                            }
+                        ],
+                        "selector": {
+                            "app.kubernetes.io/instance": "pulumi-codefresh-website",
+                            "app.kubernetes.io/name": "nginx"
+                        },
+                        "type": "LoadBalancer"
+                    }
+                },
+                "outputs": {
+                    "__initialApiVersion": "v1",
+                    "__inputs": {
+                        "apiVersion": "v1",
+                        "kind": "Service",
+                        "metadata": {
+                            "labels": {
+                                "app.kubernetes.io/instance": "pulumi-codefresh-website",
+                                "app.kubernetes.io/managed-by": "pulumi",
+                                "app.kubernetes.io/name": "nginx",
+                                "helm.sh/chart": "nginx-8.2.3"
+                            },
+                            "name": "pulumi-codefresh-website-nginx",
+                            "namespace": "pulumi-codefresh"
+                        },
+                        "spec": {
+                            "externalTrafficPolicy": "Cluster",
+                            "ports": [
+                                {
+                                    "name": "http",
+                                    "port": 80,
+                                    "targetPort": "http"
+                                }
+                            ],
+                            "selector": {
+                                "app.kubernetes.io/instance": "pulumi-codefresh-website",
+                                "app.kubernetes.io/name": "nginx"
+                            },
+                            "type": "LoadBalancer"
+                        }
+                    },
+                    "apiVersion": "v1",
+                    "kind": "Service",
+                    "metadata": {
+                        "annotations": {
+                            "kubectl.kubernetes.io/last-applied-configuration": "{\"apiVersion\":\"v1\",\"kind\":\"Service\",\"metadata\":{\"labels\":{\"app.kubernetes.io/instance\":\"pulumi-codefresh-website\",\"app.kubernetes.io/managed-by\":\"pulumi\",\"app.kubernetes.io/name\":\"nginx\",\"helm.sh/chart\":\"nginx-8.2.3\"},\"name\":\"pulumi-codefresh-website-nginx\",\"namespace\":\"pulumi-codefresh\"},\"spec\":{\"externalTrafficPolicy\":\"Cluster\",\"ports\":[{\"name\":\"http\",\"port\":80,\"targetPort\":\"http\"}],\"selector\":{\"app.kubernetes.io/instance\":\"pulumi-codefresh-website\",\"app.kubernetes.io/name\":\"nginx\"},\"type\":\"LoadBalancer\"}}\n"
+                        },
+                        "creationTimestamp": "2021-01-19T23:54:25Z",
+                        "finalizers": [
+                            "service.kubernetes.io/load-balancer-cleanup"
+                        ],
+                        "labels": {
+                            "app.kubernetes.io/instance": "pulumi-codefresh-website",
+                            "app.kubernetes.io/managed-by": "pulumi",
+                            "app.kubernetes.io/name": "nginx",
+                            "helm.sh/chart": "nginx-8.2.3"
+                        },
+                        "name": "pulumi-codefresh-website-nginx",
+                        "namespace": "pulumi-codefresh",
+                        "resourceVersion": "1151",
+                        "selfLink": "/api/v1/namespaces/pulumi-codefresh/services/pulumi-codefresh-website-nginx",
+                        "uid": "62422a9a-725a-4147-bb81-35115868e6ab"
+                    },
+                    "spec": {
+                        "clusterIP": "10.3.254.164",
+                        "externalTrafficPolicy": "Cluster",
+                        "ports": [
+                            {
+                                "name": "http",
+                                "nodePort": 31624,
+                                "port": 80,
+                                "protocol": "TCP",
+                                "targetPort": "http"
+                            }
+                        ],
+                        "selector": {
+                            "app.kubernetes.io/instance": "pulumi-codefresh-website",
+                            "app.kubernetes.io/name": "nginx"
+                        },
+                        "sessionAffinity": "None",
+                        "type": "LoadBalancer"
+                    },
+                    "status": {
+                        "loadBalancer": {
+                            "ingress": [
+                                {
+                                    "ip": "35.184.125.85"
+                                }
+                            ]
+                        }
+                    }
+                },
+                "parent": "urn:pulumi:staging::pulumi-codefresh::kubernetes:core/v1:Namespace$kubernetes:helm.sh/v3:Chart::pulumi-codefresh-website",
+                "provider": "urn:pulumi:staging::pulumi-codefresh::custom:x:GkeCluster$gcp:container/cluster:Cluster$pulumi:providers:kubernetes::pulumi-codefresh::a7f52a6c-36ea-4a5f-9299-c5367f01075a",
+                "propertyDependencies": {
+                    "apiVersion": null,
+                    "kind": null,
+                    "metadata": null,
+                    "spec": null
+                },
+                "aliases": [
+                    "urn:pulumi:staging::pulumi-codefresh::kubernetes:core/v1:Namespace$kubernetes:helm.sh/v2:Chart$kubernetes:core/v1:Service::pulumi-codefresh/pulumi-codefresh-website-nginx"
+                ]
+            },
+            {
+                "urn": "urn:pulumi:staging::pulumi-codefresh::kubernetes:core/v1:Namespace$kubernetes:helm.sh/v3:Chart$kubernetes:apps/v1:Deployment::pulumi-codefresh/pulumi-codefresh-website-nginx",
+                "custom": true,
+                "id": "pulumi-codefresh/pulumi-codefresh-website-nginx",
+                "type": "kubernetes:apps/v1:Deployment",
+                "inputs": {
+                    "apiVersion": "apps/v1",
+                    "kind": "Deployment",
+                    "metadata": {
+                        "labels": {
+                            "app.kubernetes.io/instance": "pulumi-codefresh-website",
+                            "app.kubernetes.io/managed-by": "pulumi",
+                            "app.kubernetes.io/name": "nginx",
+                            "helm.sh/chart": "nginx-8.2.3"
+                        },
+                        "name": "pulumi-codefresh-website-nginx",
+                        "namespace": "pulumi-codefresh"
+                    },
+                    "spec": {
+                        "replicas": 1,
+                        "selector": {
+                            "matchLabels": {
+                                "app.kubernetes.io/instance": "pulumi-codefresh-website",
+                                "app.kubernetes.io/name": "nginx"
+                            }
+                        },
+                        "template": {
+                            "metadata": {
+                                "labels": {
+                                    "app.kubernetes.io/instance": "pulumi-codefresh-website",
+                                    "app.kubernetes.io/managed-by": "Helm",
+                                    "app.kubernetes.io/name": "nginx",
+                                    "helm.sh/chart": "nginx-8.2.3"
+                                }
+                            },
+                            "spec": {
+                                "affinity": {
+                                    "podAntiAffinity": {
+                                        "preferredDuringSchedulingIgnoredDuringExecution": [
+                                            {
+                                                "podAffinityTerm": {
+                                                    "labelSelector": {
+                                                        "matchLabels": {
+                                                            "app.kubernetes.io/instance": "pulumi-codefresh-website",
+                                                            "app.kubernetes.io/name": "nginx"
+                                                        }
+                                                    },
+                                                    "namespaces": [
+                                                        "pulumi-codefresh"
+                                                    ],
+                                                    "topologyKey": "kubernetes.io/hostname"
+                                                },
+                                                "weight": 1
+                                            }
+                                        ]
+                                    }
+                                },
+                                "containers": [
+                                    {
+                                        "command": [
+                                            "/bin/bash",
+                                            "-ec",
+                                            "while true; do\n    cd /app \u0026\u0026 git pull origin main\n    sleep 60\ndone\n"
+                                        ],
+                                        "image": "docker.io/bitnami/git:2.29.2-debian-10-r44",
+                                        "imagePullPolicy": "IfNotPresent",
+                                        "name": "git-repo-syncer",
+                                        "volumeMounts": [
+                                            {
+                                                "mountPath": "/app",
+                                                "name": "staticsite"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "env": [
+                                            {
+                                                "name": "BITNAMI_DEBUG",
+                                                "value": "false"
+                                            }
+                                        ],
+                                        "image": "docker.io/bitnami/nginx:1.19.6-debian-10-r1",
+                                        "imagePullPolicy": "IfNotPresent",
+                                        "livenessProbe": {
+                                            "failureThreshold": 6,
+                                            "periodSeconds": 10,
+                                            "successThreshold": 1,
+                                            "tcpSocket": {
+                                                "port": "http"
+                                            },
+                                            "timeoutSeconds": 5
+                                        },
+                                        "name": "nginx",
+                                        "ports": [
+                                            {
+                                                "containerPort": 8080,
+                                                "name": "http"
+                                            }
+                                        ],
+                                        "readinessProbe": {
+                                            "failureThreshold": 3,
+                                            "initialDelaySeconds": 5,
+                                            "periodSeconds": 5,
+                                            "successThreshold": 1,
+                                            "tcpSocket": {
+                                                "port": "http"
+                                            },
+                                            "timeoutSeconds": 3
+                                        },
+                                        "resources": {
+                                            "limits": {},
+                                            "requests": {}
+                                        },
+                                        "volumeMounts": [
+                                            {
+                                                "mountPath": "/opt/bitnami/nginx/conf/server_blocks",
+                                                "name": "nginx-server-block-paths"
+                                            },
+                                            {
+                                                "mountPath": "/app",
+                                                "name": "staticsite"
+                                            }
+                                        ]
+                                    }
+                                ],
+                                "initContainers": [
+                                    {
+                                        "command": [
+                                            "/bin/bash",
+                                            "-ec",
+                                            "git clone https://github.com/MitchellGerdisch/simple_static_website.git --branch main /app\n"
+                                        ],
+                                        "image": "docker.io/bitnami/git:2.29.2-debian-10-r44",
+                                        "imagePullPolicy": "IfNotPresent",
+                                        "name": "git-clone-repository",
+                                        "volumeMounts": [
+                                            {
+                                                "mountPath": "/app",
+                                                "name": "staticsite"
+                                            }
+                                        ]
+                                    }
+                                ],
+                                "volumes": [
+                                    {
+                                        "configMap": {
+                                            "items": [
+                                                {
+                                                    "key": "server-blocks-paths.conf",
+                                                    "path": "server-blocks-paths.conf"
+                                                }
+                                            ],
+                                            "name": "pulumi-codefresh-website-nginx-server-block"
+                                        },
+                                        "name": "nginx-server-block-paths"
+                                    },
+                                    {
+                                        "emptyDir": {},
+                                        "name": "staticsite"
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                },
+                "outputs": {
+                    "__initialApiVersion": "apps/v1",
+                    "__inputs": {
+                        "apiVersion": "apps/v1",
+                        "kind": "Deployment",
+                        "metadata": {
+                            "labels": {
+                                "app.kubernetes.io/instance": "pulumi-codefresh-website",
+                                "app.kubernetes.io/managed-by": "pulumi",
+                                "app.kubernetes.io/name": "nginx",
+                                "helm.sh/chart": "nginx-8.2.3"
+                            },
+                            "name": "pulumi-codefresh-website-nginx",
+                            "namespace": "pulumi-codefresh"
+                        },
+                        "spec": {
+                            "replicas": 1,
+                            "selector": {
+                                "matchLabels": {
+                                    "app.kubernetes.io/instance": "pulumi-codefresh-website",
+                                    "app.kubernetes.io/name": "nginx"
+                                }
+                            },
+                            "template": {
+                                "metadata": {
+                                    "labels": {
+                                        "app.kubernetes.io/instance": "pulumi-codefresh-website",
+                                        "app.kubernetes.io/managed-by": "Helm",
+                                        "app.kubernetes.io/name": "nginx",
+                                        "helm.sh/chart": "nginx-8.2.3"
+                                    }
+                                },
+                                "spec": {
+                                    "affinity": {
+                                        "podAntiAffinity": {
+                                            "preferredDuringSchedulingIgnoredDuringExecution": [
+                                                {
+                                                    "podAffinityTerm": {
+                                                        "labelSelector": {
+                                                            "matchLabels": {
+                                                                "app.kubernetes.io/instance": "pulumi-codefresh-website",
+                                                                "app.kubernetes.io/name": "nginx"
+                                                            }
+                                                        },
+                                                        "namespaces": [
+                                                            "pulumi-codefresh"
+                                                        ],
+                                                        "topologyKey": "kubernetes.io/hostname"
+                                                    },
+                                                    "weight": 1
+                                                }
+                                            ]
+                                        }
+                                    },
+                                    "containers": [
+                                        {
+                                            "command": [
+                                                "/bin/bash",
+                                                "-ec",
+                                                "while true; do\n    cd /app \u0026\u0026 git pull origin main\n    sleep 60\ndone\n"
+                                            ],
+                                            "image": "docker.io/bitnami/git:2.29.2-debian-10-r44",
+                                            "imagePullPolicy": "IfNotPresent",
+                                            "name": "git-repo-syncer",
+                                            "volumeMounts": [
+                                                {
+                                                    "mountPath": "/app",
+                                                    "name": "staticsite"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "env": [
+                                                {
+                                                    "name": "BITNAMI_DEBUG",
+                                                    "value": "false"
+                                                }
+                                            ],
+                                            "image": "docker.io/bitnami/nginx:1.19.6-debian-10-r1",
+                                            "imagePullPolicy": "IfNotPresent",
+                                            "livenessProbe": {
+                                                "failureThreshold": 6,
+                                                "periodSeconds": 10,
+                                                "successThreshold": 1,
+                                                "tcpSocket": {
+                                                    "port": "http"
+                                                },
+                                                "timeoutSeconds": 5
+                                            },
+                                            "name": "nginx",
+                                            "ports": [
+                                                {
+                                                    "containerPort": 8080,
+                                                    "name": "http"
+                                                }
+                                            ],
+                                            "readinessProbe": {
+                                                "failureThreshold": 3,
+                                                "initialDelaySeconds": 5,
+                                                "periodSeconds": 5,
+                                                "successThreshold": 1,
+                                                "tcpSocket": {
+                                                    "port": "http"
+                                                },
+                                                "timeoutSeconds": 3
+                                            },
+                                            "resources": {
+                                                "limits": {},
+                                                "requests": {}
+                                            },
+                                            "volumeMounts": [
+                                                {
+                                                    "mountPath": "/opt/bitnami/nginx/conf/server_blocks",
+                                                    "name": "nginx-server-block-paths"
+                                                },
+                                                {
+                                                    "mountPath": "/app",
+                                                    "name": "staticsite"
+                                                }
+                                            ]
+                                        }
+                                    ],
+                                    "initContainers": [
+                                        {
+                                            "command": [
+                                                "/bin/bash",
+                                                "-ec",
+                                                "git clone https://github.com/MitchellGerdisch/simple_static_website.git --branch main /app\n"
+                                            ],
+                                            "image": "docker.io/bitnami/git:2.29.2-debian-10-r44",
+                                            "imagePullPolicy": "IfNotPresent",
+                                            "name": "git-clone-repository",
+                                            "volumeMounts": [
+                                                {
+                                                    "mountPath": "/app",
+                                                    "name": "staticsite"
+                                                }
+                                            ]
+                                        }
+                                    ],
+                                    "volumes": [
+                                        {
+                                            "configMap": {
+                                                "items": [
+                                                    {
+                                                        "key": "server-blocks-paths.conf",
+                                                        "path": "server-blocks-paths.conf"
+                                                    }
+                                                ],
+                                                "name": "pulumi-codefresh-website-nginx-server-block"
+                                            },
+                                            "name": "nginx-server-block-paths"
+                                        },
+                                        {
+                                            "emptyDir": {},
+                                            "name": "staticsite"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "apiVersion": "apps/v1",
+                    "kind": "Deployment",
+                    "metadata": {
+                        "annotations": {
+                            "deployment.kubernetes.io/revision": "1",
+                            "kubectl.kubernetes.io/last-applied-configuration": "{\"apiVersion\":\"apps/v1\",\"kind\":\"Deployment\",\"metadata\":{\"labels\":{\"app.kubernetes.io/instance\":\"pulumi-codefresh-website\",\"app.kubernetes.io/managed-by\":\"pulumi\",\"app.kubernetes.io/name\":\"nginx\",\"helm.sh/chart\":\"nginx-8.2.3\"},\"name\":\"pulumi-codefresh-website-nginx\",\"namespace\":\"pulumi-codefresh\"},\"spec\":{\"replicas\":1,\"selector\":{\"matchLabels\":{\"app.kubernetes.io/instance\":\"pulumi-codefresh-website\",\"app.kubernetes.io/name\":\"nginx\"}},\"template\":{\"metadata\":{\"labels\":{\"app.kubernetes.io/instance\":\"pulumi-codefresh-website\",\"app.kubernetes.io/managed-by\":\"Helm\",\"app.kubernetes.io/name\":\"nginx\",\"helm.sh/chart\":\"nginx-8.2.3\"}},\"spec\":{\"affinity\":{\"podAntiAffinity\":{\"preferredDuringSchedulingIgnoredDuringExecution\":[{\"podAffinityTerm\":{\"labelSelector\":{\"matchLabels\":{\"app.kubernetes.io/instance\":\"pulumi-codefresh-website\",\"app.kubernetes.io/name\":\"nginx\"}},\"namespaces\":[\"pulumi-codefresh\"],\"topologyKey\":\"kubernetes.io/hostname\"},\"weight\":1}]}},\"containers\":[{\"command\":[\"/bin/bash\",\"-ec\",\"while true; do\\n    cd /app \\u0026\\u0026 git pull origin main\\n    sleep 60\\ndone\\n\"],\"image\":\"docker.io/bitnami/git:2.29.2-debian-10-r44\",\"imagePullPolicy\":\"IfNotPresent\",\"name\":\"git-repo-syncer\",\"volumeMounts\":[{\"mountPath\":\"/app\",\"name\":\"staticsite\"}]},{\"env\":[{\"name\":\"BITNAMI_DEBUG\",\"value\":\"false\"}],\"image\":\"docker.io/bitnami/nginx:1.19.6-debian-10-r1\",\"imagePullPolicy\":\"IfNotPresent\",\"livenessProbe\":{\"failureThreshold\":6,\"periodSeconds\":10,\"successThreshold\":1,\"tcpSocket\":{\"port\":\"http\"},\"timeoutSeconds\":5},\"name\":\"nginx\",\"ports\":[{\"containerPort\":8080,\"name\":\"http\"}],\"readinessProbe\":{\"failureThreshold\":3,\"initialDelaySeconds\":5,\"periodSeconds\":5,\"successThreshold\":1,\"tcpSocket\":{\"port\":\"http\"},\"timeoutSeconds\":3},\"resources\":{\"limits\":{},\"requests\":{}},\"volumeMounts\":[{\"mountPath\":\"/opt/bitnami/nginx/conf/server_blocks\",\"name\":\"nginx-server-block-paths\"},{\"mountPath\":\"/app\",\"name\":\"staticsite\"}]}],\"initContainers\":[{\"command\":[\"/bin/bash\",\"-ec\",\"git clone https://github.com/MitchellGerdisch/simple_static_website.git --branch main /app\\n\"],\"image\":\"docker.io/bitnami/git:2.29.2-debian-10-r44\",\"imagePullPolicy\":\"IfNotPresent\",\"name\":\"git-clone-repository\",\"volumeMounts\":[{\"mountPath\":\"/app\",\"name\":\"staticsite\"}]}],\"volumes\":[{\"configMap\":{\"items\":[{\"key\":\"server-blocks-paths.conf\",\"path\":\"server-blocks-paths.conf\"}],\"name\":\"pulumi-codefresh-website-nginx-server-block\"},\"name\":\"nginx-server-block-paths\"},{\"emptyDir\":{},\"name\":\"staticsite\"}]}}}}\n"
+                        },
+                        "creationTimestamp": "2021-01-19T23:54:25Z",
+                        "generation": 1,
+                        "labels": {
+                            "app.kubernetes.io/instance": "pulumi-codefresh-website",
+                            "app.kubernetes.io/managed-by": "pulumi",
+                            "app.kubernetes.io/name": "nginx",
+                            "helm.sh/chart": "nginx-8.2.3"
+                        },
+                        "name": "pulumi-codefresh-website-nginx",
+                        "namespace": "pulumi-codefresh",
+                        "resourceVersion": "1424",
+                        "selfLink": "/apis/apps/v1/namespaces/pulumi-codefresh/deployments/pulumi-codefresh-website-nginx",
+                        "uid": "0d9172be-ecf9-49ed-8104-626ca60fe89f"
+                    },
+                    "spec": {
+                        "progressDeadlineSeconds": 600,
+                        "replicas": 1,
+                        "revisionHistoryLimit": 10,
+                        "selector": {
+                            "matchLabels": {
+                                "app.kubernetes.io/instance": "pulumi-codefresh-website",
+                                "app.kubernetes.io/name": "nginx"
+                            }
+                        },
+                        "strategy": {
+                            "rollingUpdate": {
+                                "maxSurge": "25%",
+                                "maxUnavailable": "25%"
+                            },
+                            "type": "RollingUpdate"
+                        },
+                        "template": {
+                            "metadata": {
+                                "labels": {
+                                    "app.kubernetes.io/instance": "pulumi-codefresh-website",
+                                    "app.kubernetes.io/managed-by": "Helm",
+                                    "app.kubernetes.io/name": "nginx",
+                                    "helm.sh/chart": "nginx-8.2.3"
+                                }
+                            },
+                            "spec": {
+                                "affinity": {
+                                    "podAntiAffinity": {
+                                        "preferredDuringSchedulingIgnoredDuringExecution": [
+                                            {
+                                                "podAffinityTerm": {
+                                                    "labelSelector": {
+                                                        "matchLabels": {
+                                                            "app.kubernetes.io/instance": "pulumi-codefresh-website",
+                                                            "app.kubernetes.io/name": "nginx"
+                                                        }
+                                                    },
+                                                    "namespaces": [
+                                                        "pulumi-codefresh"
+                                                    ],
+                                                    "topologyKey": "kubernetes.io/hostname"
+                                                },
+                                                "weight": 1
+                                            }
+                                        ]
+                                    }
+                                },
+                                "containers": [
+                                    {
+                                        "command": [
+                                            "/bin/bash",
+                                            "-ec",
+                                            "while true; do\n    cd /app \u0026\u0026 git pull origin main\n    sleep 60\ndone\n"
+                                        ],
+                                        "image": "docker.io/bitnami/git:2.29.2-debian-10-r44",
+                                        "imagePullPolicy": "IfNotPresent",
+                                        "name": "git-repo-syncer",
+                                        "resources": {},
+                                        "terminationMessagePath": "/dev/termination-log",
+                                        "terminationMessagePolicy": "File",
+                                        "volumeMounts": [
+                                            {
+                                                "mountPath": "/app",
+                                                "name": "staticsite"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "env": [
+                                            {
+                                                "name": "BITNAMI_DEBUG",
+                                                "value": "false"
+                                            }
+                                        ],
+                                        "image": "docker.io/bitnami/nginx:1.19.6-debian-10-r1",
+                                        "imagePullPolicy": "IfNotPresent",
+                                        "livenessProbe": {
+                                            "failureThreshold": 6,
+                                            "periodSeconds": 10,
+                                            "successThreshold": 1,
+                                            "tcpSocket": {
+                                                "port": "http"
+                                            },
+                                            "timeoutSeconds": 5
+                                        },
+                                        "name": "nginx",
+                                        "ports": [
+                                            {
+                                                "containerPort": 8080,
+                                                "name": "http",
+                                                "protocol": "TCP"
+                                            }
+                                        ],
+                                        "readinessProbe": {
+                                            "failureThreshold": 3,
+                                            "initialDelaySeconds": 5,
+                                            "periodSeconds": 5,
+                                            "successThreshold": 1,
+                                            "tcpSocket": {
+                                                "port": "http"
+                                            },
+                                            "timeoutSeconds": 3
+                                        },
+                                        "resources": {},
+                                        "terminationMessagePath": "/dev/termination-log",
+                                        "terminationMessagePolicy": "File",
+                                        "volumeMounts": [
+                                            {
+                                                "mountPath": "/opt/bitnami/nginx/conf/server_blocks",
+                                                "name": "nginx-server-block-paths"
+                                            },
+                                            {
+                                                "mountPath": "/app",
+                                                "name": "staticsite"
+                                            }
+                                        ]
+                                    }
+                                ],
+                                "dnsPolicy": "ClusterFirst",
+                                "initContainers": [
+                                    {
+                                        "command": [
+                                            "/bin/bash",
+                                            "-ec",
+                                            "git clone https://github.com/MitchellGerdisch/simple_static_website.git --branch main /app\n"
+                                        ],
+                                        "image": "docker.io/bitnami/git:2.29.2-debian-10-r44",
+                                        "imagePullPolicy": "IfNotPresent",
+                                        "name": "git-clone-repository",
+                                        "resources": {},
+                                        "terminationMessagePath": "/dev/termination-log",
+                                        "terminationMessagePolicy": "File",
+                                        "volumeMounts": [
+                                            {
+                                                "mountPath": "/app",
+                                                "name": "staticsite"
+                                            }
+                                        ]
+                                    }
+                                ],
+                                "restartPolicy": "Always",
+                                "schedulerName": "default-scheduler",
+                                "securityContext": {},
+                                "terminationGracePeriodSeconds": 30,
+                                "volumes": [
+                                    {
+                                        "configMap": {
+                                            "defaultMode": 420,
+                                            "items": [
+                                                {
+                                                    "key": "server-blocks-paths.conf",
+                                                    "path": "server-blocks-paths.conf"
+                                                }
+                                            ],
+                                            "name": "pulumi-codefresh-website-nginx-server-block"
+                                        },
+                                        "name": "nginx-server-block-paths"
+                                    },
+                                    {
+                                        "emptyDir": {},
+                                        "name": "staticsite"
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    "status": {
+                        "availableReplicas": 1,
+                        "conditions": [
+                            {
+                                "lastTransitionTime": "2021-01-19T23:55:48Z",
+                                "lastUpdateTime": "2021-01-19T23:55:48Z",
+                                "message": "Deployment has minimum availability.",
+                                "reason": "MinimumReplicasAvailable",
+                                "status": "True",
+                                "type": "Available"
+                            },
+                            {
+                                "lastTransitionTime": "2021-01-19T23:54:25Z",
+                                "lastUpdateTime": "2021-01-19T23:55:48Z",
+                                "message": "ReplicaSet \"pulumi-codefresh-website-nginx-544f94fd\" has successfully progressed.",
+                                "reason": "NewReplicaSetAvailable",
+                                "status": "True",
+                                "type": "Progressing"
+                            }
+                        ],
+                        "observedGeneration": 1,
+                        "readyReplicas": 1,
+                        "replicas": 1,
+                        "updatedReplicas": 1
+                    }
+                },
+                "parent": "urn:pulumi:staging::pulumi-codefresh::kubernetes:core/v1:Namespace$kubernetes:helm.sh/v3:Chart::pulumi-codefresh-website",
+                "provider": "urn:pulumi:staging::pulumi-codefresh::custom:x:GkeCluster$gcp:container/cluster:Cluster$pulumi:providers:kubernetes::pulumi-codefresh::a7f52a6c-36ea-4a5f-9299-c5367f01075a",
+                "propertyDependencies": {
+                    "apiVersion": null,
+                    "kind": null,
+                    "metadata": null,
+                    "spec": null
+                },
+                "aliases": [
+                    "urn:pulumi:staging::pulumi-codefresh::kubernetes:core/v1:Namespace$kubernetes:helm.sh/v3:Chart$kubernetes:apps/v1beta1:Deployment::pulumi-codefresh/pulumi-codefresh-website-nginx",
+                    "urn:pulumi:staging::pulumi-codefresh::kubernetes:core/v1:Namespace$kubernetes:helm.sh/v3:Chart$kubernetes:apps/v1beta2:Deployment::pulumi-codefresh/pulumi-codefresh-website-nginx",
+                    "urn:pulumi:staging::pulumi-codefresh::kubernetes:core/v1:Namespace$kubernetes:helm.sh/v3:Chart$kubernetes:extensions/v1beta1:Deployment::pulumi-codefresh/pulumi-codefresh-website-nginx",
+                    "urn:pulumi:staging::pulumi-codefresh::kubernetes:core/v1:Namespace$kubernetes:helm.sh/v2:Chart$kubernetes:apps/v1:Deployment::pulumi-codefresh/pulumi-codefresh-website-nginx"
+                ]
+            }
+        ]
+    }
+}

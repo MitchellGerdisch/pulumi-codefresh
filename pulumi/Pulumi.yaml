@@ -1,0 +1,8 @@
+name: pulumi-codefresh
+description: Pulumi-Codefresh Webinar Example
+runtime: nodejs
+template:
+  config:
+    gcp:zone:
+      description: The GCP zone to deploy into
+      default: us-central1-a

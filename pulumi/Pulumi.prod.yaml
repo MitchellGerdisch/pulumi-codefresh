@@ -1,0 +1,7 @@
+config:
+  gcp:project:
+    secure: AAABAH2PpSpAkValzPq+StpfjxzfZXHTh6KHR15WKmFkasTMa7EQnAXkBJMSXg==
+  gcp:region: us-central1
+  gcp:zone: us-central1-a
+  pulumi-codefresh:codefreshApiKey:
+    secure: AAABAGZu+6MOFRXIsYCdXl0Sc7jvJvRcgdbJbQeEJ9fhLTiK+l1n9SHKAV4X+OF2Go5fKRfLx91fj9QOjjByF+4MjvDSyDg8sP1kGaUCNp/2iR8GKDUjh6Q=
