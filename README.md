@@ -1,3 +1,3 @@
 # pulumi-codefresh
 
-Pulumi and Codefresh related files for a Pulumi-Codefresh webinar.
+Projects and files related to webinars done in conjunction with Codefresh.io.
