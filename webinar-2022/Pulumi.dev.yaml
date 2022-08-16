@@ -1,0 +1,4 @@
+config:
+  aws:region: us-east-2
+  eks-codefresh:codefreshApiKey:
+    secure: AAABABGtZQxRZ3EEJlmlyZ8jWavmVDxAskLcFQzCzvXURjilbx+9oMs4PpFQnLnvPweMiIdNoSSSQnUabVZ5GkRLqREQ9hcfTxlTF9ohBwcJG5//hhUdStw=
