@@ -51,7 +51,7 @@ const albIngCntlr = new AlbIngressController(name, {
     clusterName: cluster.eksCluster.name,
     clusterOidcProviderArn: clusterOidcProviderArn,
     clusterOidcProviderUrl: clusterOidcProviderUrl,
-});
+}, { dependsOn: [vpc, cluster]});
 
 // If an API key for Codefresh is configured, then register the cluster with Codefresh.
 if (codefreshApiKey) {
