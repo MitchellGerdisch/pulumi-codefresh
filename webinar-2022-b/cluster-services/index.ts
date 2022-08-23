@@ -1,13 +1,14 @@
 import * as aws from "@pulumi/aws";
 import * as k8s from "@pulumi/kubernetes";
 import * as pulumi from "@pulumi/pulumi";
+import { local } from "@pulumi/command";
+import { StackTag } from "@pulumi/pulumiservice"
 import { config } from "./config";
 import { RdsDatabase } from "./rds-db";
 import { FluentdCloudWatch } from "./fluentd-cloudwatch";
 import { ExternalDns } from "./external-dns";
 import { AlbIngressController } from "./alb-ing-cntlr";
 
-const projectName = pulumi.getProject();
 
 //// // Deploy RDS Aurora DB
 // const rds = new RdsDatabase("rds-aurora-db", {
@@ -31,6 +32,10 @@ const projectName = pulumi.getProject();
 //     username: db.masterUsername,
 //     password: rds.password, // db.masterPassword can possibly be undefined. Use rds.password instead.
 //// };
+
+const project = pulumi.getProject();
+const stack = pulumi.getStack();
+const name = `${project}-${stack}`;
 
 const provider = new k8s.Provider("provider", {kubeconfig: config.kubeconfig});
 
@@ -92,4 +97,28 @@ const certCertificateValidation = new aws.acm.CertificateValidation("cert", {
     validationRecordFqdns: [certValidation.fqdn],
 });
 
+// --- Register Cluster with Codefresh ---
+if (config.codefreshApiKey) {
+    const cfRegistration = new local.Command(`codefresh-cmd`, {
+        dir: "../commands",
+        interpreter: [ "/bin/sh" ],
+        create: "codefresh_register",
+        delete: "codefresh_deregister",
+        environment: {
+            CODEFRESH_API_KEY: config.codefreshApiKey,
+            CLUSTER_KUBECONFIG_STRING: config.kubeconfig.apply(kubeconfig => JSON.stringify(kubeconfig))
+        }
+    })
+}
+
+// --- Pulumi Service Stack Tag ---
+const stackTag = new StackTag(`stacktag`, {
+    name: "Codefresh",
+    value: name,
+    organization: config.org,
+    project: project,
+    stack: stack,
+});
+
 export const validationCertArn = certCertificateValidation.certificateArn
+export const albSecurityGroupId = config.albSecurityGroupId

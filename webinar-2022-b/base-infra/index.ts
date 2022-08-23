@@ -166,7 +166,7 @@ const cluster = new eks.Cluster(`${projectName}`, {
     publicSubnetIds: publicSubnetIds,
     privateSubnetIds: privateSubnetIds,
     providerCredentialOpts: { profileName: process.env.AWS_PROFILE}, 
-    nodeAssociatePublicIpAddress: false,
+    // nodeAssociatePublicIpAddress: false,
     skipDefaultNodeGroup: true,
     deployDashboard: false,
     version: config.clusterVersion,
@@ -188,7 +188,8 @@ const cluster = new eks.Cluster(`${projectName}`, {
 });
 
 // Export the cluster details.
-export const kubeconfig = cluster.kubeconfig.apply(JSON.stringify);
+// export const kubeconfig = cluster.kubeconfig.apply(JSON.stringify);
+export const kubeconfig = pulumi.secret(cluster.kubeconfig)
 export const clusterName = cluster.core.cluster.name;
 export const region = aws.config.region;
 export const nodeSecurityGroupId = cluster.nodeSecurityGroup.id; // For RDS

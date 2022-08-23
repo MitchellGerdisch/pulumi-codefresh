@@ -10,6 +10,7 @@ const clusterFullStackName = `${pulumiOrg}/${clusterProjectName}/${pulumi.getSta
 const clusterStackRef = new pulumi.StackReference(clusterFullStackName);
 
 export const config = {
+    org: pulumiOrg,
     // Infra
     vpcId: clusterStackRef.requireOutput("vpcId"),
     privateSubnetIds: clusterStackRef.requireOutput("privateSubnetIds"),
@@ -24,6 +25,9 @@ export const config = {
     clusterOidcProviderArn: clusterStackRef.requireOutput("clusterOidcProviderArn"),
     clusterOidcProviderUrl: clusterStackRef.requireOutput("clusterOidcProviderUrl"),
 
+    // ALB Security Group ID
+    albSecurityGroupId: clusterStackRef.requireOutput("albSecurityGroupId"),
+
     //// // RDS Cluster Instances
     // dbReplicas: pulumiConfig.getNumber("dbReplicas") ?? 2,
     //// dbInstanceType: pulumiConfig.get("dbInstanceType") || "db.r4.xlarge",
@@ -31,4 +35,7 @@ export const config = {
     // DNS Hosted Zone to manage with external-dns and use with ALB, ACM.
     hostedZoneDomainName: pulumiConfig.require("hostedZoneDomainName"), 
     hostedZoneDomainSubdomain: pulumiConfig.require("hostedZoneDomainSubdomain"), 
+
+    // Codefresh API Key
+    codefreshApiKey: pulumiConfig.getSecret("codefreshApiKey"),
 };

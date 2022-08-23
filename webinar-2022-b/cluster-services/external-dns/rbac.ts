@@ -99,6 +99,11 @@ export function createClusterRole(
             rules: [
                 {
                     apiGroups: [""],
+                    resources: ["endpoints"],
+                    verbs: ["get","watch","list"]
+                },
+                {
+                    apiGroups: [""],
                     resources: ["services"],
                     verbs: ["get", "list", "watch"],
                 },
@@ -115,9 +120,14 @@ export function createClusterRole(
                 {
                     apiGroups: [""],
                     resources: ["nodes"],
-                    verbs: ["list"],
+                    verbs: ["get", "list", "watch"],
                 },
-            ],
+                {
+                    apiGroups: ["networking","networking.k8s.io"],
+                    resources: ["ingresses"],
+                    verbs: ["get","watch","list"]
+                },
+            ]
         },
         { provider },
     );
