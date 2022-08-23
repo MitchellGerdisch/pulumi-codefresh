@@ -1,0 +1,3 @@
+name: codefresh-webinar-base-infra
+description: Platform resources - VPC, EKS, IAM, etc.
+runtime: nodejs

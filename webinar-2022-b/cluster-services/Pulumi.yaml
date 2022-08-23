@@ -1,0 +1,3 @@
+name: codefresh-webinar-cluster-services
+description: Kubernetes and supporting resources - Kubernetes, Logging, etc.
+runtime: nodejs
