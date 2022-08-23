@@ -26,3 +26,6 @@ const certCertificateValidation = new aws.acm.CertificateValidation("cert", {
   certificateArn: certCertificate.arn,
   validationRecordFqdns: [certValidation.fqdn],
 });
+
+export const validationCertArn = certCertificateValidation.certificateArn
+
