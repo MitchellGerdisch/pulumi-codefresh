@@ -17,4 +17,6 @@ export const config = {
     pulumiNodeGroupDesiredCapacity: pulumiConfig.getNumber("pulumiNodeGroupDesiredCapacity") ?? 3,
     pulumiNodeGroupMinSize: pulumiConfig.getNumber("pulumiNodeGroupMinSize") ?? 3,
     pulumiNodeGroupMaxSize: pulumiConfig.getNumber("pulumiNodeGroupMaxSize") ?? 5,
+
+    tags: { "Project": "pulumi-k8s-aws-cluster", "Owner": "pulumi"},
 };
