@@ -38,8 +38,8 @@ export KUBECONFIG=/tmp/kubeconfig
 echo ${CLUSTER_KUBECONFIG_STRING} > ${KUBECONFIG}
 
 # delete and recreate context to make sure everything is in synch
-cf config delete-context codefresh #2> /dev/null
-cf config create-context codefresh --api-key  ${CODEFRESH_API_KEY} #2> /dev/null
+cf config delete-context codefresh 2> /dev/null
+cf config create-context codefresh --api-key  ${CODEFRESH_API_KEY} 2> /dev/null
 
 # if deregister then remove the cluster from codefresh
 if [ $option == "deregister" ]
@@ -47,11 +47,9 @@ then
   # find the cluster to disconnect
   server_url=`cf cluster list codefresh-hosted | grep aws | sed 's/  */;/g' | cut -d";" -f1` 
   # disconnect the cluster
-  cf cluster remove codefresh-hosted --server-url ${server_url} #2> /dev/null
+  cf cluster remove codefresh-hosted --server-url ${server_url} 2> /dev/null
 else # default to register
   # connect the cluster
-  cf cluster add codefresh-hosted --context aws #2> /dev/null
+  cf cluster add codefresh-hosted --context aws 2> /dev/null
 fi
-
-
 
