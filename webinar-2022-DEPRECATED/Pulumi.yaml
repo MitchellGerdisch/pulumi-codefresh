@@ -1,3 +1,0 @@
-name: eks-codefresh
-description: EKS cluster registered with Codefresh
-runtime: nodejs
