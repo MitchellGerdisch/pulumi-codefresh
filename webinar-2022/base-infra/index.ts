@@ -4,7 +4,7 @@ import * as eks from "@pulumi/eks";
 import * as k8s from "@pulumi/kubernetes";
 import * as pulumi from "@pulumi/pulumi";
 import { config } from "./config";
-import * as ngPols from "./ngPolicies";
+import * as nodePols from "./nodePolicies";
 import * as albSecGrp from "./albSecGroup";
 
 const projectName = pulumi.getProject();
@@ -45,7 +45,7 @@ export const privateSubnetIds = vpc.privateSubnetIds;
 
 // Create an EKS cluster.
 const cluster = new eks.Cluster(`${projectName}`, {
-    instanceRoles: [ ngPols.nodegroupIamRole, ngPols.pulumiNodegroupIamRole ],
+    instanceRoles: [ nodePols.nodegroupIamRole, nodePols.pulumiNodegroupIamRole ],
     vpcId: vpcId,
     publicSubnetIds: publicSubnetIds,
     privateSubnetIds: privateSubnetIds,
@@ -106,7 +106,7 @@ const amiId = ssmParam.value.apply(s => JSON.parse(s).image_id)
 
 const ngStandard = new eks.NodeGroup(`${projectName}-ng-standard`, {
     cluster: cluster,
-    instanceProfile: new aws.iam.InstanceProfile("ng-standard", {role: ngPols.nodegroupIamRole}),
+    instanceProfile: new aws.iam.InstanceProfile("ng-standard", {role: nodePols.nodegroupIamRole}),
     nodeAssociatePublicIpAddress: false,
     nodeSecurityGroup: cluster.nodeSecurityGroup,
     clusterIngressRule: cluster.eksClusterIngressRule,
@@ -130,7 +130,7 @@ const ngStandard = new eks.NodeGroup(`${projectName}-ng-standard`, {
 // Create a standard node group tainted for use only by self-hosted pulumi.
 const ngStandardPulumi = new eks.NodeGroup(`${projectName}-ng-standard-pulumi`, {
     cluster: cluster,
-    instanceProfile: new aws.iam.InstanceProfile("ng-standard-pulumi", {role: ngPols.pulumiNodegroupIamRole}),
+    instanceProfile: new aws.iam.InstanceProfile("ng-standard-pulumi", {role: nodePols.pulumiNodegroupIamRole}),
     nodeAssociatePublicIpAddress: false,
     nodeSecurityGroup: cluster.nodeSecurityGroup,
     clusterIngressRule: cluster.eksClusterIngressRule,

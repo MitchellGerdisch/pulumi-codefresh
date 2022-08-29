@@ -47,9 +47,9 @@ then
   # find the cluster to disconnect
   server_url=`cf cluster list codefresh-hosted | grep aws | sed 's/  */;/g' | cut -d";" -f1` 
   # disconnect the cluster
-  cf cluster remove codefresh-hosted --server-url ${server_url} 2> /dev/null
+  cf cluster remove codefresh-hosted --server-url ${server_url} 2> /dev/null || true
 else # default to register
   # connect the cluster
-  cf cluster add codefresh-hosted --context aws 2> /dev/null
+  cf cluster add codefresh-hosted --context aws 2> /dev/null 
 fi
 
