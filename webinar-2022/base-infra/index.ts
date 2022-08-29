@@ -3,6 +3,8 @@ import * as awsx from "@pulumi/awsx";
 import * as eks from "@pulumi/eks";
 import * as k8s from "@pulumi/kubernetes";
 import * as pulumi from "@pulumi/pulumi";
+import { StackTag } from "@pulumi/pulumiservice"
+
 import { config } from "./config";
 import * as nodePols from "./nodePolicies";
 import * as albSecGrp from "./albSecGroup";
@@ -183,4 +185,15 @@ const quotaAppsNamespace = new k8s.core.v1.ResourceQuota("apps", {
     }
 },{
     provider: cluster.provider
+});
+
+// --- Pulumi Service Stack Tag ---
+const project = pulumi.getProject();
+const stack = pulumi.getStack();
+const stackTag = new StackTag(`stacktag`, {
+    name: "Codefresh",
+    value: "Webinar",
+    organization: config.org,
+    project: project,
+    stack: stack,
 });

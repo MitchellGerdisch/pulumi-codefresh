@@ -5,7 +5,7 @@ let pulumiConfig = new pulumi.Config();
 // Existing Pulumi stack reference in the format:
 // <organization>/<project>/<stack> e.g. "myUser/myProject/dev"
 const pulumiOrg = pulumiConfig.require("org");
-const clusterProjectName = pulumiConfig.require("projectName");
+const clusterProjectName = pulumiConfig.require("clusterProjectName");
 const clusterFullStackName = `${pulumiOrg}/${clusterProjectName}/${pulumi.getStack()}`;
 const clusterStackRef = new pulumi.StackReference(clusterFullStackName);
 

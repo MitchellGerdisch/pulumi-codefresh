@@ -1,0 +1,8 @@
+config:
+  aws:region: us-east-2
+  codefresh-webinar-cluster-services:clusterProjectName: codefresh-webinar-base-infra
+  codefresh-webinar-cluster-services:codefreshApiKey:
+    secure: AAABANKRZBN2G6qIazTzChinfhoOyIfk3IvJtiU9A0gTEvR+0Ww9D68ym+nwgjHJ81S/H67JUpKiGTN1HecimYRbNJ8hcve0qSR5UOUXhriIo1wctJNI5mI=
+  codefresh-webinar-cluster-services:hostedZoneDomainName: pulumi-ce.team
+  codefresh-webinar-cluster-services:hostedZoneDomainSubdomain: codefresh
+  codefresh-webinar-cluster-services:org: demo

@@ -3,6 +3,7 @@ import * as k8s from "@pulumi/kubernetes";
 import * as pulumi from "@pulumi/pulumi";
 import { local } from "@pulumi/command";
 import { StackTag } from "@pulumi/pulumiservice"
+
 import { config } from "./config";
 import { FluentdCloudWatch } from "./fluentd-cloudwatch";
 import { ExternalDns } from "./external-dns";
@@ -89,7 +90,7 @@ if (config.codefreshApiKey) {
 // --- Pulumi Service Stack Tag ---
 const stackTag = new StackTag(`stacktag`, {
     name: "Codefresh",
-    value: name,
+    value: "Webinar",
     organization: config.org,
     project: project,
     stack: stack,
