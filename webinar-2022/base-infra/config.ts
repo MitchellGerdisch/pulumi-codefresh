@@ -2,8 +2,6 @@ import * as pulumi from "@pulumi/pulumi";
 
 const pulumiConfig = new pulumi.Config();
 
-
-
 export const config = {
     org: pulumiConfig.require("org"),
     clusterVersion: pulumiConfig.get("clusterVersion") || "1.22", 

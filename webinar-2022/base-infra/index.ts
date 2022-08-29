@@ -52,7 +52,6 @@ const cluster = new eks.Cluster(`${projectName}`, {
     publicSubnetIds: publicSubnetIds,
     privateSubnetIds: privateSubnetIds,
     providerCredentialOpts: { profileName: process.env.AWS_PROFILE}, 
-    // nodeAssociatePublicIpAddress: false,
     skipDefaultNodeGroup: true,
     deployDashboard: false,
     version: config.clusterVersion,
