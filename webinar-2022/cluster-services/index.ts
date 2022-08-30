@@ -50,29 +50,6 @@ const albIngCntlr = new AlbIngressController("alb-ing-cntlr", {
     clusterOidcProviderUrl: config.clusterOidcProviderUrl,
 });
 
-// Create the wildcard TLS cert in ACM to use with the ALB on both the API and
-// the console.
-const certCertificate = new aws.acm.Certificate("cert", {
-    domainName: `*.${config.hostedZoneDomainSubdomain}.${config.hostedZoneDomainName}`,
-    subjectAlternativeNames: [`${config.hostedZoneDomainSubdomain}.${config.hostedZoneDomainName}`],
-    validationMethod: "DNS",
-});
-const zone = pulumi.output(aws.route53.getZone({
-    name: `${config.hostedZoneDomainName}.`,
-    privateZone: false,
-}));
-const certValidation = new aws.route53.Record("certValidation", {
-    name: certCertificate.domainValidationOptions[0].resourceRecordName,
-    records: [certCertificate.domainValidationOptions[0].resourceRecordValue],
-    ttl: 60,
-    type: certCertificate.domainValidationOptions[0].resourceRecordType,
-    zoneId: zone.id,
-});
-const certCertificateValidation = new aws.acm.CertificateValidation("cert", {
-    certificateArn: certCertificate.arn,
-    validationRecordFqdns: [certValidation.fqdn],
-});
-
 // --- Register Cluster with Codefresh ---
 if (config.codefreshApiKey) {
     const cfRegistration = new local.Command(`codefresh-cmd`, {
@@ -94,6 +71,30 @@ const stackTag = new StackTag(`stacktag`, {
     organization: config.org,
     project: project,
     stack: stack,
+});
+
+
+// Create the wildcard TLS cert in ACM to use with the ALB on both the API and
+// the console.
+const certCertificate = new aws.acm.Certificate("cert", {
+    domainName: `*.${config.hostedZoneDomainSubdomain}.${config.hostedZoneDomainName}`,
+    subjectAlternativeNames: [`${config.hostedZoneDomainSubdomain}.${config.hostedZoneDomainName}`],
+    validationMethod: "DNS",
+});
+const zone = pulumi.output(aws.route53.getZone({
+    name: `${config.hostedZoneDomainName}.`,
+    privateZone: false,
+}));
+const certValidation = new aws.route53.Record("certValidation", {
+    name: certCertificate.domainValidationOptions[0].resourceRecordName,
+    records: [certCertificate.domainValidationOptions[0].resourceRecordValue],
+    ttl: 60,
+    type: certCertificate.domainValidationOptions[0].resourceRecordType,
+    zoneId: zone.id,
+});
+const certCertificateValidation = new aws.acm.CertificateValidation("cert", {
+    certificateArn: certCertificate.arn,
+    validationRecordFqdns: [certValidation.fqdn],
 });
 
 export const validationCertArn = certCertificateValidation.certificateArn
