@@ -11,7 +11,6 @@ import { AlbIngressController } from "./alb-ing-cntlr";
 
 const project = pulumi.getProject();
 const stack = pulumi.getStack();
-const name = `${project}-${stack}`;
 
 const provider = new k8s.Provider("provider", {kubeconfig: config.kubeconfig});
 
